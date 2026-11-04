@@ -4,7 +4,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>我的知識隨身聽</title>
 <style>
-:root{font-family:system-ui,'Microsoft JhengHei',sans-serif;color:#283347;background:#f7f5f1}*{box-sizing:border-box}body{margin:0}header{background:#243d58;color:white;padding:42px 18px;text-align:center}h1{margin:0 0 12px;font-size:clamp(27px,5vw,40px)}header p{margin:0;color:#e1e8ee}main{max-width:760px;margin:auto;padding:26px 18px 65px}.grid{display:grid;gap:18px}.card,.article{background:white;border:0;border-radius:22px;padding:25px;box-shadow:0 6px 24px #1b263011;text-align:left;color:inherit;width:100%}.card{cursor:pointer}.card:hover,.card:focus-visible{outline:2px solid #7198bc}.card h2{margin:0 0 12px;font-size:24px}.card p{margin:0;line-height:1.7}.hidden{display:none}button{font:inherit}.back,.action{border:0;border-radius:12px;background:#243d58;color:white;padding:12px 18px;cursor:pointer}.back{margin-bottom:20px}.article{margin-top:18px}.article h3{margin-top:0}.article p{line-height:1.85;white-space:pre-line}.actions{display:flex;flex-wrap:wrap;gap:10px}.action:disabled{opacity:.5}small{color:#667}footer{text-align:center;padding:25px;color:#777}
+:root{font-family:system-ui,'Microsoft JhengHei',sans-serif;color:#283347;background:#f7f5f1}*{box-sizing:border-box}body{margin:0}header{background:#243d58;color:white;padding:42px 18px;text-align:center}h1{margin:0 0 12px;font-size:clamp(27px,5vw,40px)}header p{margin:0;color:#e1e8ee}main{max-width:760px;margin:auto;padding:26px 18px 65px}.grid{display:grid;gap:18px}.card,.article{background:white;border:0;border-radius:22px;padding:25px;box-shadow:0 6px 24px #1b263011;text-align:left;color:inherit;width:100%}.card{cursor:pointer}.card:hover,.card:focus-visible{outline:2px solid #7198bc}.card h2{margin:0 0 12px;font-size:24px}.card p{margin:0;line-height:1.7}.hidden{display:none}button{font:inherit}.back,.action{border:0;border-radius:12px;background:#243d58;color:white;padding:12px 18px;cursor:pointer}.back{margin-bottom:20px}.article{margin-top:18px}.article h3{margin-top:0}.article p{line-height:1.85;white-space:pre-line}.actions{display:flex;flex-wrap:wrap;gap:10px}.action:disabled{opacity:.5}.newslink{display:inline-block;margin-top:12px;color:#245b92}.status{color:#667;font-size:14px}small{color:#667}footer{text-align:center;padding:25px;color:#777}
 </style>
 </head>
 <body>
@@ -16,7 +16,7 @@
 <button class="card" onclick="showCategory('knowledge')"><h2>📚 知識精華</h2><p>把值得學習的內容整理成隨時可聽的知識。</p></button>
 <button class="card" onclick="showCategory('audio')"><h2>🎙️ 精華說書</h2><p>選擇文章，使用中文語音朗讀。</p></button>
 </section>
-<section id="detail" class="hidden"><button class="back" onclick="goHome()">← 返回首頁</button><h2 id="categoryTitle"></h2><p id="categoryIntro"></p><div id="articles"></div></section>
+<section id="detail" class="hidden"><button class="back" onclick="goHome()">← 返回首頁</button><h2 id="categoryTitle"></h2><p id="categoryIntro"></p><p id="newsStatus" class="status"></p><div id="articles"></div></section>
 </main><footer>© 2026 我的知識隨身聽</footer>
 <script>
 const entries={
@@ -27,9 +27,46 @@ const entries={
 };
 entries.audio.items=[...entries.invest.items,...entries.health.items,...entries.knowledge.items];
 let currentUtterance=null;
+let liveNews=null;
+async function loadNews(){
+ try{
+  const response=await fetch('articles.json?time='+Date.now(),{cache:'no-store'});
+  if(!response.ok)throw new Error('not available');
+  const data=await response.json();
+  if(!data.sections || typeof data.sections!=='object')throw new Error('invalid data');
+  liveNews=data;
+ }catch(error){liveNews=null;console.info('Latest headlines unavailable; showing sample articles.');}
+}
+loadNews();
 function stopSpeech(){if('speechSynthesis' in window){speechSynthesis.cancel()}currentUtterance=null}
 function speak(index){if(!('speechSynthesis' in window)){alert('目前瀏覽器不支援語音朗讀，請改用最新版 Chrome、Edge 或 Safari。');return}stopSpeech();const article=window.visibleItems[index];const utterance=new SpeechSynthesisUtterance(article[0]+'。'+article[1]);utterance.lang='zh-TW';utterance.rate=.9;const voices=speechSynthesis.getVoices();const voice=voices.find(v=>v.lang.toLowerCase()==='zh-tw')||voices.find(v=>v.lang.toLowerCase().startsWith('zh'));if(voice)utterance.voice=voice;currentUtterance=utterance;speechSynthesis.speak(utterance)}
-function showCategory(category){stopSpeech();const data=entries[category];window.visibleItems=data.items;document.getElementById('home').classList.add('hidden');document.getElementById('detail').classList.remove('hidden');document.getElementById('categoryTitle').textContent=data.title;document.getElementById('categoryIntro').textContent=data.intro;const holder=document.getElementById('articles');holder.replaceChildren();data.items.forEach((item,i)=>{const section=document.createElement('section');section.className='article';const title=document.createElement('h3');title.textContent=item[0];const body=document.createElement('p');body.textContent=item[1];const actions=document.createElement('div');actions.className='actions';const play=document.createElement('button');play.className='action';play.textContent='▶ 播放朗讀';play.onclick=()=>speak(i);const stop=document.createElement('button');stop.className='action';stop.textContent='■ 停止';stop.onclick=stopSpeech;actions.append(play,stop);section.append(title,body,actions);holder.append(section)});window.scrollTo(0,0)}
+function showCategory(category){
+ stopSpeech();
+ const data=entries[category];
+ const news=(liveNews && liveNews.sections)||{};
+ const allNews=['invest','health','knowledge'].flatMap(k=>Array.isArray(news[k])?news[k]:[]);
+ const fresh=category==='audio'?allNews:(Array.isArray(news[category])?news[category]:[]);
+ const items=fresh.length?fresh.map(x=>[x.title,x.summary,x.url,x.published]):data.items;
+ window.visibleItems=items;
+ document.getElementById('home').classList.add('hidden');
+ document.getElementById('detail').classList.remove('hidden');
+ document.getElementById('categoryTitle').textContent=data.title;
+ document.getElementById('categoryIntro').textContent=data.intro;
+ const status=document.getElementById('newsStatus');
+ status.textContent=fresh.length?'最新資訊更新：'+liveNews.updated_at+'（標題與摘要來自公開新聞來源）':'目前顯示示範文章；最新資訊尚未更新或暫時無法取得。';
+ const holder=document.getElementById('articles');holder.replaceChildren();
+ items.forEach((item,i)=>{
+  const section=document.createElement('section');section.className='article';
+  const title=document.createElement('h3');title.textContent=item[0];
+  const body=document.createElement('p');body.textContent=item[1];
+  const actions=document.createElement('div');actions.className='actions';
+  const play=document.createElement('button');play.className='action';play.textContent='▶ 播放朗讀';play.onclick=()=>speak(i);
+  const stop=document.createElement('button');stop.className='action';stop.textContent='■ 停止';stop.onclick=stopSpeech;
+  actions.append(play,stop);section.append(title,body,actions);
+  if(item[2]){const link=document.createElement('a');link.className='newslink';link.href=item[2];link.target='_blank';link.rel='noopener noreferrer';link.textContent='閱讀新聞原文 ↗';section.append(link)}
+  holder.append(section);
+ });window.scrollTo(0,0)
+}
 function goHome(){stopSpeech();document.getElementById('detail').classList.add('hidden');document.getElementById('home').classList.remove('hidden');window.scrollTo(0,0)}
 window.addEventListener('pagehide',stopSpeech);
 </script>
