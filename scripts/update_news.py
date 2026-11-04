@@ -1,5 +1,7 @@
-"""Daily Traditional Chinese RSS headlines for Knowledge Listen.
-Only stores short feed-provided metadata and original links, never full articles.
+"""Daily Traditional Chinese RSS news for Knowledge Listen.
+
+Stores feed-provided summaries and full text only when a feed explicitly
+provides a distinct, substantial full-text field. Never scrapes article pages.
 """
 import datetime as dt
 import email.utils
@@ -15,13 +17,12 @@ ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / 'articles.json'
 LIMIT = 16
 MAX_AGE_DAYS = 7
+MAX_FULL_CHARS = 30000
+CONTENT_NS = '{http://purl.org/rss/1.0/modules/content/}encoded'
+ATOM_NS = '{http://www.w3.org/2005/Atom}'
 SOURCES = {
-    'invest': [
-        ('中央社・產經證券', 'https://feeds.feedburner.com/rsscna/finance'),
-    ],
-    'health': [
-        ('中央社・生活醫藥', 'https://feeds.feedburner.com/rsscna/lifehealth'),
-    ],
+    'invest': [('中央社・產經證券', 'https://feeds.feedburner.com/rsscna/finance')],
+    'health': [('中央社・生活醫藥', 'https://feeds.feedburner.com/rsscna/lifehealth')],
     'knowledge': [
         ('中央社・科技', 'https://feeds.feedburner.com/rsscna/technology'),
         ('中央社・文化', 'https://feeds.feedburner.com/rsscna/culture'),
@@ -35,9 +36,14 @@ QUERIES = {
 }
 
 
-def plain(value):
-    value = re.sub(r'<[^>]*>', ' ', value or '')
-    return re.sub(r'\s+', ' ', html.unescape(value)).strip()[:350]
+def plain(value, limit=None):
+    value = re.sub(r'(?is)<(script|style)\b[^>]*>.*?</\1>', ' ', value or '')
+    value = re.sub(r'(?i)<\s*br\s*/?\s*>|</\s*(?:p|div|li|h[1-6])\s*>', '\n', value)
+    value = re.sub(r'<[^>]*>', ' ', value)
+    value = html.unescape(value)
+    value = re.sub(r'[ \t\r\f\v]+', ' ', value)
+    value = re.sub(r'\n\s*\n+', '\n\n', value).strip()
+    return value[:limit] if limit else value
 
 
 def text(node, tag):
@@ -47,7 +53,7 @@ def text(node, tag):
 
 def fetch_xml(url):
     req = urllib.request.Request(url, headers={
-        'User-Agent': 'Mozilla/5.0 (compatible; KnowledgeListenRSS/2.0)',
+        'User-Agent': 'Mozilla/5.0 (compatible; KnowledgeListenRSS/2.1)',
         'Accept': 'application/rss+xml, application/atom+xml, application/xml, text/xml, */*',
     })
     with urllib.request.urlopen(req, timeout=20) as response:
@@ -59,18 +65,17 @@ def parse_feed(root, source):
     now = dt.datetime.now(dt.timezone.utc)
     items = root.findall('.//channel/item')
     if not items:
-        items = root.findall('.//{http://www.w3.org/2005/Atom}entry')
+        items = root.findall('.//' + ATOM_NS + 'entry')
     for item in items:
-        title = plain(text(item, 'title') or text(item, '{http://www.w3.org/2005/Atom}title'))
+        title = plain(text(item, 'title') or text(item, ATOM_NS + 'title'), 350)
         link = text(item, 'link')
         if not link:
-            for elem in item.findall('{http://www.w3.org/2005/Atom}link'):
+            for elem in item.findall(ATOM_NS + 'link'):
                 if elem.attrib.get('rel', 'alternate') == 'alternate':
                     link = elem.attrib.get('href', '')
                     break
         published = (text(item, 'pubDate') or text(item, 'published') or
-                     text(item, '{http://www.w3.org/2005/Atom}published') or
-                     text(item, '{http://www.w3.org/2005/Atom}updated'))
+                     text(item, ATOM_NS + 'published') or text(item, ATOM_NS + 'updated'))
         try:
             when = email.utils.parsedate_to_datetime(published)
         except (ValueError, TypeError, IndexError):
@@ -85,18 +90,27 @@ def parse_feed(root, source):
         parsed = urllib.parse.urlparse(link)
         if not title or parsed.scheme not in ('http', 'https') or not parsed.netloc:
             continue
-        summary = plain(text(item, 'description') or text(item, 'summary') or
-                        text(item, '{http://www.w3.org/2005/Atom}summary'))
+        raw_summary = (text(item, 'description') or text(item, 'summary') or
+                       text(item, ATOM_NS + 'summary'))
+        summary = plain(raw_summary, 350)
         if summary == title or len(summary) < 25:
             summary = '請點選原文連結閱讀完整報導。'
-        results.append({
+        # Only explicit full-text fields, not RSS descriptions or snippets.
+        full = plain(text(item, CONTENT_NS) or text(item, ATOM_NS + 'content'), MAX_FULL_CHARS)
+        # Avoid mistaking short feed excerpts for full articles.
+        if len(full) < 500 or full == summary or full == title:
+            full = ''
+        article = {
             'title': title,
             'summary': summary,
             'url': link,
             'published': when.date().isoformat(),
             'source': source,
             '_time': when.timestamp(),
-        })
+        }
+        if full:
+            article['content'] = full
+        results.append(article)
     return results
 
 
