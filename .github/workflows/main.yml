@@ -1,12 +1,38 @@
-
-name: Knowledge Listen Test
+name: Daily Knowledge Update
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: '0 23 * * *' # 07:00 Asia/Taipei (UTC+8)
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-knowledge-update
+  cancel-in-progress: false
 
 jobs:
-  test:
+  update:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - name: Test website automation
-        run: echo "Knowledge Listen automation is working!"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch RSS headlines
+        run: python scripts/update_news.py
+      - name: Commit updated articles if changed
+        run: |
+          if git diff --quiet -- articles.json; then
+            echo 'No changes to publish.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add articles.json
+          git commit -m 'Update daily knowledge headlines'
+          git push
