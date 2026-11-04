@@ -9,7 +9,13 @@ const examples=[['invest','認識分散投資','分散投資可以降低單一�
 let data=examples,visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
 const el=id=>document.getElementById(id),str=x=>typeof x==='string'?x.trim():'';
 function cat(x){x=String(x||'').toLowerCase();return /invest|finance|market|business|投資|理財|財經|金融|股市|經濟/.test(x)?'invest':/health|medical|medicine|健康|醫療|醫藥|衛生/.test(x)?'health':'knowledge'}
-function parse(x){if(Array.isArray(x))return x;if(!x||typeof x!=='object')return [];for(const k of ['articles','items','news','entries','data','results'])if(x[k]){const a=parse(x[k]);if(a.length)return a}return Object.entries(x).flatMap(([k,v])=>Array.isArray(v)?v.map(a=>({...a,category:a.category||k})):[])}
+function parse(x){
+ if(Array.isArray(x))return x;
+ if(!x||typeof x!=='object')return [];
+ if(x.sections&&typeof x.sections==='object')return Object.entries(x.sections).flatMap(([category,items])=>Array.isArray(items)?items.map(a=>({...a,category})):[]);
+ for(const k of ['articles','items','news','entries','data','results'])if(x[k]){const a=parse(x[k]);if(a.length)return a}
+ return Object.entries(x).flatMap(([category,items])=>Array.isArray(items)?items.map(a=>({...a,category:a.category||category})):[])
+}
 function norm(a){if(!a||typeof a!=='object')return null;let title=str(a.title||a.headline||a.name);if(!title)return null;return {title,category:cat(a.category||a.type||a.topic||a.section),summary:str(a.summary||a.description||a.excerpt||a.digest),content:str(a.full_text||a.fullText||a.fulltext||a.content||a.body||a.text),url:str(a.url||a.link||a.source_url),source:str(a.source||a.publisher),date:str(a.date||a.published||a.pubDate)}}
 async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=a;if(!el('detail').classList.contains('hidden'))show(section)}}catch(e){console.info('使用內建示範文章',e)}}
 function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
