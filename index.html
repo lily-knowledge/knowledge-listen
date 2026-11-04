@@ -1,72 +1,36 @@
-
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>我的知識隨身聽</title>
-  <style>
-    body {
-      margin: 0;
-      background: #f7f5f1;
-      color: #283347;
-      font-family: Arial, sans-serif;
-    }
-    header {
-      background: #233b55;
-      color: white;
-      text-align: center;
-      padding: 45px 20px;
-    }
-    h1 { margin-bottom: 12px; }
-    main {
-      max-width: 850px;
-      margin: 35px auto;
-      padding: 0 20px;
-    }
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 18px;
-      box-shadow: 0 3px 12px #00000010;
-    }
-    .card h2 { margin-top: 0; }
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #777;
-    }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>我的知識隨身聽</title>
+<style>
+:root{font-family:system-ui,'Microsoft JhengHei',sans-serif;color:#283347;background:#f7f5f1}*{box-sizing:border-box}body{margin:0}header{background:#243d58;color:white;padding:42px 18px;text-align:center}h1{margin:0 0 12px;font-size:clamp(27px,5vw,40px)}header p{margin:0;color:#e1e8ee}main{max-width:760px;margin:auto;padding:26px 18px 65px}.grid{display:grid;gap:18px}.card,.article{background:white;border:0;border-radius:22px;padding:25px;box-shadow:0 6px 24px #1b263011;text-align:left;color:inherit;width:100%}.card{cursor:pointer}.card:hover,.card:focus-visible{outline:2px solid #7198bc}.card h2{margin:0 0 12px;font-size:24px}.card p{margin:0;line-height:1.7}.hidden{display:none}button{font:inherit}.back,.action{border:0;border-radius:12px;background:#243d58;color:white;padding:12px 18px;cursor:pointer}.back{margin-bottom:20px}.article{margin-top:18px}.article h3{margin-top:0}.article p{line-height:1.85;white-space:pre-line}.actions{display:flex;flex-wrap:wrap;gap:10px}.action:disabled{opacity:.5}small{color:#667}footer{text-align:center;padding:25px;color:#777}
+</style>
 </head>
 <body>
-  <header>
-    <h1>🎧 我的知識隨身聽</h1>
-    <p>投資・健康・知識精華說書平台</p>
-  </header>
-
-  <main>
-    <section class="card">
-      <h2>📈 投資理財</h2>
-      <p>掌握投資觀念、市場趨勢與理財知識。</p>
-    </section>
-
-    <section class="card">
-      <h2>💚 健康醫療</h2>
-      <p>用簡單易懂的方式學習健康知識。</p>
-    </section>
-
-    <section class="card">
-      <h2>📚 知識精華</h2>
-      <p>把值得學習的內容整理成隨時可聽的知識。</p>
-    </section>
-
-    <section class="card">
-      <h2>🎙️ 精華說書</h2>
-      <p>未來將加入音訊播放與個人收藏功能。</p>
-    </section>
-  </main>
-
-  <footer>© 2026 我的知識隨身聽</footer>
-</body>
-</html>
+<header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華說書平台</p></header>
+<main>
+<section id="home" class="grid">
+<button class="card" onclick="showCategory('invest')"><h2>📈 投資理財</h2><p>掌握投資觀念、市場趨勢與理財知識。</p></button>
+<button class="card" onclick="showCategory('health')"><h2>💚 健康醫療</h2><p>用簡單易懂的方式學習健康知識。</p></button>
+<button class="card" onclick="showCategory('knowledge')"><h2>📚 知識精華</h2><p>把值得學習的內容整理成隨時可聽的知識。</p></button>
+<button class="card" onclick="showCategory('audio')"><h2>🎙️ 精華說書</h2><p>選擇文章，使用中文語音朗讀。</p></button>
+</section>
+<section id="detail" class="hidden"><button class="back" onclick="goHome()">← 返回首頁</button><h2 id="categoryTitle"></h2><p id="categoryIntro"></p><div id="articles"></div></section>
+</main><footer>© 2026 我的知識隨身聽</footer>
+<script>
+const entries={
+ invest:{title:'📈 投資理財',intro:'投資入門知識',items:[['認識分散投資','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['什麼是安全邊際？','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。']]},
+ health:{title:'💚 健康醫療',intro:'日常健康知識（僅供衛教，不取代醫療診斷）',items:[['睡眠與健康','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['認識血壓紀錄','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。']]},
+ knowledge:{title:'📚 知識精華',intro:'短篇知識閱讀',items:[['如何有效學習？','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['建立每日閱讀習慣','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']]},
+ audio:{title:'🎙️ 精華說書',intro:'點選下方文章的「播放朗讀」，就能開始聽。',items:[]}
+};
+entries.audio.items=[...entries.invest.items,...entries.health.items,...entries.knowledge.items];
+let currentUtterance=null;
+function stopSpeech(){if('speechSynthesis' in window){speechSynthesis.cancel()}currentUtterance=null}
+function speak(index){if(!('speechSynthesis' in window)){alert('目前瀏覽器不支援語音朗讀，請改用最新版 Chrome、Edge 或 Safari。');return}stopSpeech();const article=window.visibleItems[index];const utterance=new SpeechSynthesisUtterance(article[0]+'。'+article[1]);utterance.lang='zh-TW';utterance.rate=.9;const voices=speechSynthesis.getVoices();const voice=voices.find(v=>v.lang.toLowerCase()==='zh-tw')||voices.find(v=>v.lang.toLowerCase().startsWith('zh'));if(voice)utterance.voice=voice;currentUtterance=utterance;speechSynthesis.speak(utterance)}
+function showCategory(category){stopSpeech();const data=entries[category];window.visibleItems=data.items;document.getElementById('home').classList.add('hidden');document.getElementById('detail').classList.remove('hidden');document.getElementById('categoryTitle').textContent=data.title;document.getElementById('categoryIntro').textContent=data.intro;const holder=document.getElementById('articles');holder.replaceChildren();data.items.forEach((item,i)=>{const section=document.createElement('section');section.className='article';const title=document.createElement('h3');title.textContent=item[0];const body=document.createElement('p');body.textContent=item[1];const actions=document.createElement('div');actions.className='actions';const play=document.createElement('button');play.className='action';play.textContent='▶ 播放朗讀';play.onclick=()=>speak(i);const stop=document.createElement('button');stop.className='action';stop.textContent='■ 停止';stop.onclick=stopSpeech;actions.append(play,stop);section.append(title,body,actions);holder.append(section)});window.scrollTo(0,0)}
+function goHome(){stopSpeech();document.getElementById('detail').classList.add('hidden');document.getElementById('home').classList.remove('hidden');window.scrollTo(0,0)}
+window.addEventListener('pagehide',stopSpeech);
+</script>
+</body></html>
