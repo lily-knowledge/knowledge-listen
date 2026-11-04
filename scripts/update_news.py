@@ -114,6 +114,27 @@ def parse_feed(root, source):
     return results
 
 
+
+def make_explanation(title, summary, category):
+    """Source-grounded listening guide; not an AI-written news article."""
+    clean = summary.strip()
+    if not clean or clean == '請點選原文連結閱讀完整報導。':
+        return '這則新聞目前只有標題，尚無足夠資料可做詳細解說。請開啟原文確認。'
+    guides = {
+        'invest': ('理解這類財經消息時，可以分別留意事件本身、影響的公司或市場，以及報導是否提供具體數字。',
+                   '股價與市場走勢還會受到其他因素影響；單篇報導不能當作買賣建議。'),
+        'health': ('閱讀醫療消息時，應分清楚研究發現、醫師建議與已確立的治療指引，並注意報導是否提到適用對象。',
+                   '健康資訊不能取代個別診斷或治療；有疑問應向醫療專業人員確認。'),
+        'knowledge': ('理解這類知識消息時，可以先找出事件的核心主題，再留意報導提出的證據、時間與背景。',
+                      '若想進一步確認細節，建議閱讀原始報導或相關第一手資料。')
+    }
+    guide, caution = guides.get(category, guides['knowledge'])
+    return ('以下是依據新聞來源摘要整理的延伸導讀，不是新聞全文。\n\n'
+            '新聞重點：' + clean + '\n\n'
+            '理解角度：' + guide + '\n\n'
+            '閱讀提醒：' + caution + '\n\n'
+            '以上未補充來源沒有提供的新事實；更多細節請點選閱讀原文。')
+
 def google_fallback(key):
     params = urllib.parse.urlencode({
         'q': QUERIES[key], 'hl': 'zh-TW', 'gl': 'TW', 'ceid': 'TW:zh-Hant'
@@ -152,6 +173,7 @@ def main():
                 continue
             seen.add(identity)
             item.pop('_time', None)
+            item['explanation'] = make_explanation(item['title'], item['summary'], key)
             chosen.append(item)
             if len(chosen) >= LIMIT:
                 break
@@ -160,6 +182,8 @@ def main():
             updated = True
         else:
             sections[key] = previous.get('sections', {}).get(key, [])
+            for item in sections[key]:
+                item['explanation'] = make_explanation(item.get('title', ''), item.get('summary', ''), key)
         print(key, len(sections[key]), 'final items')
     if not updated:
         print('No feeds available; preserving previous articles.json')
