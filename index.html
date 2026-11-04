@@ -1,73 +1,26 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>我的知識隨身聽</title>
-<style>
-:root{font-family:system-ui,'Microsoft JhengHei',sans-serif;color:#283347;background:#f7f5f1}*{box-sizing:border-box}body{margin:0}header{background:#243d58;color:white;padding:42px 18px;text-align:center}h1{margin:0 0 12px;font-size:clamp(27px,5vw,40px)}header p{margin:0;color:#e1e8ee}main{max-width:760px;margin:auto;padding:26px 18px 65px}.grid{display:grid;gap:18px}.card,.article{background:white;border:0;border-radius:22px;padding:25px;box-shadow:0 6px 24px #1b263011;text-align:left;color:inherit;width:100%}.card{cursor:pointer}.card:hover,.card:focus-visible{outline:2px solid #7198bc}.card h2{margin:0 0 12px;font-size:24px}.card p{margin:0;line-height:1.7}.hidden{display:none}button{font:inherit}.back,.action{border:0;border-radius:12px;background:#243d58;color:white;padding:12px 18px;cursor:pointer}.back{margin-bottom:20px}.article{margin-top:18px}.article h3{margin-top:0}.article p{line-height:1.85;white-space:pre-line}.actions{display:flex;flex-wrap:wrap;gap:10px}.action:disabled{opacity:.5}.newslink{display:inline-block;margin-top:12px;color:#245b92}.status{color:#667;font-size:14px}small{color:#667}footer{text-align:center;padding:25px;color:#777}
-</style>
-</head>
-<body>
-<header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華說書平台</p></header>
-<main>
-<section id="home" class="grid">
-<button class="card" onclick="showCategory('invest')"><h2>📈 投資理財</h2><p>掌握投資觀念、市場趨勢與理財知識。</p></button>
-<button class="card" onclick="showCategory('health')"><h2>💚 健康醫療</h2><p>用簡單易懂的方式學習健康知識。</p></button>
-<button class="card" onclick="showCategory('knowledge')"><h2>📚 知識精華</h2><p>把值得學習的內容整理成隨時可聽的知識。</p></button>
-<button class="card" onclick="showCategory('audio')"><h2>🎙️ 精華說書</h2><p>選擇文章，使用中文語音朗讀。</p></button>
-</section>
-<section id="detail" class="hidden"><button class="back" onclick="goHome()">← 返回首頁</button><h2 id="categoryTitle"></h2><p id="categoryIntro"></p><p id="newsStatus" class="status"></p><div id="articles"></div></section>
-</main><footer>© 2026 我的知識隨身聽</footer>
+<!doctype html><html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>我的知識隨身聽</title>
+<style>body{margin:0;background:#f5f6f8;color:#26384c;font-family:system-ui,'Microsoft JhengHei',sans-serif}header{background:#243d58;color:white;text-align:center;padding:35px 12px}main{max-width:800px;margin:auto;padding:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:15px}.card,.article,.player{background:white;border:0;border-radius:17px;padding:22px;margin-bottom:14px;box-shadow:0 4px 20px #0001}.card{text-align:left;cursor:pointer;color:inherit}.card h2{margin:0 0 8px}.card p,.article p{line-height:1.8}.hidden{display:none}button,select{font:inherit}button{cursor:pointer}.btn{background:#243d58;color:white;border:0;border-radius:10px;padding:10px 15px;margin:4px}.btn:disabled{opacity:.4}.alt{background:#e4ebf2;color:#243d58}.active{background:#087d84}.article p{white-space:pre-line}.player{position:sticky;bottom:8px;border:1px solid #ccd9e5}.note{color:#637488;font-size:14px;line-height:1.7}a{margin:8px;color:#175c9b}footer{text-align:center;padding:20px;color:#7b8795}</style>
+<header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華｜摘要與全文朗讀</p></header><main>
+<div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>集中聆聽所有文章</p></button></div>
+<div id="detail" class="hidden"><button class="btn alt" onclick="home()">← 返回首頁</button><h2 id="heading"></h2><p>朗讀模式：<button class="btn" id="sbtn" onclick="setMode('summary')">摘要</button><button class="btn" id="fbtn" onclick="setMode('full')">全文</button></p><p class="note" id="notice"></p><div id="articles"></div></div>
+<div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1" selected>1倍</option><option value="1.25">1.25倍</option><option value="1.5">1.5倍</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><footer>© 2026 我的知識隨身聽</footer>
 <script>
-const entries={
- invest:{title:'📈 投資理財',intro:'投資入門知識',items:[['認識分散投資','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['什麼是安全邊際？','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。']]},
- health:{title:'💚 健康醫療',intro:'日常健康知識（僅供衛教，不取代醫療診斷）',items:[['睡眠與健康','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['認識血壓紀錄','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。']]},
- knowledge:{title:'📚 知識精華',intro:'短篇知識閱讀',items:[['如何有效學習？','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['建立每日閱讀習慣','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']]},
- audio:{title:'🎙️ 精華說書',intro:'點選下方文章的「播放朗讀」，就能開始聽。',items:[]}
-};
-entries.audio.items=[...entries.invest.items,...entries.health.items,...entries.knowledge.items];
-let currentUtterance=null;
-let liveNews=null;
-async function loadNews(){
- try{
-  const response=await fetch('articles.json?time='+Date.now(),{cache:'no-store'});
-  if(!response.ok)throw new Error('not available');
-  const data=await response.json();
-  if(!data.sections || typeof data.sections!=='object')throw new Error('invalid data');
-  liveNews=data;
- }catch(error){liveNews=null;console.info('Latest headlines unavailable; showing sample articles.');}
-}
-loadNews();
-function stopSpeech(){if('speechSynthesis' in window){speechSynthesis.cancel()}currentUtterance=null}
-function speak(index){if(!('speechSynthesis' in window)){alert('目前瀏覽器不支援語音朗讀，請改用最新版 Chrome、Edge 或 Safari。');return}stopSpeech();const article=window.visibleItems[index];const utterance=new SpeechSynthesisUtterance(article[0]+'。'+article[1]);utterance.lang='zh-TW';utterance.rate=.9;const voices=speechSynthesis.getVoices();const voice=voices.find(v=>v.lang.toLowerCase()==='zh-tw')||voices.find(v=>v.lang.toLowerCase().startsWith('zh'));if(voice)utterance.voice=voice;currentUtterance=utterance;speechSynthesis.speak(utterance)}
-function showCategory(category){
- stopSpeech();
- const data=entries[category];
- const news=(liveNews && liveNews.sections)||{};
- const allNews=['invest','health','knowledge'].flatMap(k=>Array.isArray(news[k])?news[k]:[]);
- const fresh=category==='audio'?allNews:(Array.isArray(news[category])?news[category]:[]);
- const items=fresh.length?fresh.map(x=>[x.title,x.summary,x.url,x.published]):data.items;
- window.visibleItems=items;
- document.getElementById('home').classList.add('hidden');
- document.getElementById('detail').classList.remove('hidden');
- document.getElementById('categoryTitle').textContent=data.title;
- document.getElementById('categoryIntro').textContent=data.intro;
- const status=document.getElementById('newsStatus');
- status.textContent=fresh.length?'最新資訊更新：'+liveNews.updated_at+'（標題與摘要來自公開新聞來源）':'目前顯示示範文章；最新資訊尚未更新或暫時無法取得。';
- const holder=document.getElementById('articles');holder.replaceChildren();
- items.forEach((item,i)=>{
-  const section=document.createElement('section');section.className='article';
-  const title=document.createElement('h3');title.textContent=item[0];
-  const body=document.createElement('p');body.textContent=item[1];
-  const actions=document.createElement('div');actions.className='actions';
-  const play=document.createElement('button');play.className='action';play.textContent='▶ 播放朗讀';play.onclick=()=>speak(i);
-  const stop=document.createElement('button');stop.className='action';stop.textContent='■ 停止';stop.onclick=stopSpeech;
-  actions.append(play,stop);section.append(title,body,actions);
-  if(item[2]){const link=document.createElement('a');link.className='newslink';link.href=item[2];link.target='_blank';link.rel='noopener noreferrer';link.textContent='閱讀新聞原文 ↗';section.append(link)}
-  holder.append(section);
- });window.scrollTo(0,0)
-}
-function goHome(){stopSpeech();document.getElementById('detail').classList.add('hidden');document.getElementById('home').classList.remove('hidden');window.scrollTo(0,0)}
-window.addEventListener('pagehide',stopSpeech);
-</script>
-</body></html>
+const examples=[['invest','認識分散投資','分散投資可以降低單一資產的風險，但無法保證獲利。','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['invest','什麼是安全邊際？','買入價格與估計合理價值之間保留一定空間。','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。'],['health','睡眠與健康','規律作息與舒適睡眠環境有助健康。','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['health','認識血壓紀錄','持續記錄血壓比只看一次量測更有參考價值。','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。'],['knowledge','如何有效學習？','拆解目標，透過重述與間隔複習加深記憶。','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['knowledge','建立每日閱讀習慣','每天固定閱讀五分鐘並記錄重點。','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']].map(([category,title,summary,content])=>({category,title,summary,content}));
+let data=examples,visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
+const el=id=>document.getElementById(id),str=x=>typeof x==='string'?x.trim():'';
+function cat(x){x=String(x||'').toLowerCase();return /invest|finance|market|business|投資|理財|財經|金融|股市|經濟/.test(x)?'invest':/health|medical|medicine|健康|醫療|醫藥|衛生/.test(x)?'health':'knowledge'}
+function parse(x){if(Array.isArray(x))return x;if(!x||typeof x!=='object')return [];for(const k of ['articles','items','news','entries','data','results'])if(x[k]){const a=parse(x[k]);if(a.length)return a}return Object.entries(x).flatMap(([k,v])=>Array.isArray(v)?v.map(a=>({...a,category:a.category||k})):[])}
+function norm(a){if(!a||typeof a!=='object')return null;let title=str(a.title||a.headline||a.name);if(!title)return null;return {title,category:cat(a.category||a.type||a.topic||a.section),summary:str(a.summary||a.description||a.excerpt||a.digest),content:str(a.full_text||a.fullText||a.fulltext||a.content||a.body||a.text),url:str(a.url||a.link||a.source_url),source:str(a.source||a.publisher),date:str(a.date||a.published||a.pubDate)}}
+async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=a;if(!el('detail').classList.contains('hidden'))show(section)}}catch(e){console.info('使用內建示範文章',e)}}
+function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
+function show(k){stop();section=k;visible=k==='audio'?[...data]:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
+function home(){stop();el('detail').classList.add('hidden');el('home').classList.remove('hidden')}
+function setMode(m){mode=m;localStorage.setItem('listen-mode',m);stop();render()}
+function summary(a){return a.summary||a.content.slice(0,180)+(a.content.length>180?'……':'')||'尚無摘要'}
+function render(){el('sbtn').classList.toggle('active',mode==='summary');el('fbtn').classList.toggle('active',mode==='full');el('notice').textContent=mode==='full'?'全文模式只朗讀資料中已有的完整內文。未提供全文的新聞請點原文連結或切換摘要。':'摘要模式適合快速收聽每日新聞。';let holder=el('articles');holder.replaceChildren();if(!visible.length)holder.textContent='目前沒有文章';visible.forEach((a,i)=>{let box=document.createElement('article');box.className='article';let h=document.createElement('h3');h.textContent=a.title;let p=document.createElement('p');p.textContent=mode==='full'?(a.content||'這篇新聞目前沒有提供全文，請切換摘要或開啟原文。'):summary(a);let meta=document.createElement('div');meta.className='note';meta.textContent=[a.source,a.date].filter(Boolean).join(' · ');let b=document.createElement('button');b.className='btn';b.textContent='▶ '+(mode==='full'?'全文朗讀':'摘要朗讀');b.disabled=mode==='full'&&!a.content;b.onclick=()=>play(i);box.append(h,meta,p,b);if(/^https?:\/\//i.test(a.url)){let link=document.createElement('a');link.href=a.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='🔗 閱讀原文';box.append(link)}holder.append(box)})}
+function play(i){if(!('speechSynthesis'in window)){alert('瀏覽器不支援朗讀，請改用 Chrome 或 Edge');return}let a=visible[i];if(!a)return;let text=mode==='full'?a.content:summary(a);if(!text)return;stop();index=i;let t=token,u=new SpeechSynthesisUtterance(a.title+'。'+text);u.lang='zh-TW';u.rate=Number(el('rate').value);let voices=speechSynthesis.getVoices();u.voice=voices.find(v=>v.lang.toLowerCase()==='zh-tw')||voices.find(v=>v.lang.toLowerCase().startsWith('zh'))||null;u.onstart=()=>{if(t===token)el('status').textContent='朗讀中'};u.onend=()=>{if(t===token){if(el('continuous').checked)next();else stop()}};u.onerror=e=>{if(t===token&&!['canceled','interrupted'].includes(e.error))el('status').textContent='朗讀中斷，請重試'};el('playing').textContent=a.title;el('status').textContent='準備語音……';el('player').classList.remove('hidden');speechSynthesis.speak(u)}
+function pauseResume(){if(index<0)return;if(paused){speechSynthesis.resume();el('pause').textContent='⏸ 暫停';el('status').textContent='朗讀中'}else{speechSynthesis.pause();el('pause').textContent='▶ 繼續';el('status').textContent='已暫停'}paused=!paused}
+function next(){let n=index+1;while(n<visible.length&&mode==='full'&&!visible[n].content)n++;n<visible.length?play(n):stop()}
+function restart(){if(index>=0)play(index)}
+window.addEventListener('pagehide',stop);render();load();
+</script></html>
