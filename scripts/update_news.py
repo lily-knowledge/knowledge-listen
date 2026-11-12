@@ -22,6 +22,7 @@ CONTENT_NS = '{http://purl.org/rss/1.0/modules/content/}encoded'
 ATOM_NS = '{http://www.w3.org/2005/Atom}'
 SOURCES = {
     'invest': [('中央社・產經證券', 'https://feeds.feedburner.com/rsscna/finance')],
+    'hualien': [('中央通訊社', 'https://feeds.feedburner.com/rsscna/local')],
     'health': [('中央社・生活醫藥', 'https://feeds.feedburner.com/rsscna/lifehealth')],
     'knowledge': [
         ('中央社・科技', 'https://feeds.feedburner.com/rsscna/technology'),
@@ -32,6 +33,7 @@ SOURCES = {
 QUERIES = {
     'invest': '台股 OR 美股 OR ETF 投資 理財',
     'health': '健康 醫療 疾病預防 衛教',
+    'hualien': '花蓮 when:7d',
     'knowledge': '科學 科技 生活知識 研究',
 }
 
@@ -165,6 +167,7 @@ def main():
             pass
     sections = {}
     updated = False
+    investment_stories = set()
     for key, feeds in SOURCES.items():
         candidates = []
         for source, url in feeds:
@@ -178,26 +181,22 @@ def main():
             candidates.extend(google_fallback(key))
         except Exception as exc:
             print('Google news unavailable:', key, str(exc))
-        candidates.sort(key=lambda x: x['_time'], reverse=True)
-        seen = set()
-        chosen = []
-        for item in candidates:
-            identity = re.sub(r'\W+', '', item['title'].lower())[:100]
-            if identity in seen:
-                continue
-            seen.add(identity)
-            item.pop('_time', None)
-            apply_editorial(item)
-            chosen.append(item)
-            if len(chosen) >= LIMIT:
-                break
-        if chosen:
-            sections[key] = chosen
+        sections[key] = select_articles(key, candidates, investment_stories)
+        if sections[key]:
             updated = True
         else:
             sections[key] = previous.get('sections', {}).get(key, [])
+            if key == 'knowledge':
+                sections[key] = [
+                    item for item in sections[key]
+                    if story_keys(item).isdisjoint(investment_stories)
+                ]
             for item in sections[key]:
                 apply_editorial(item)
+        if key == 'invest':
+            investment_stories.update(
+                identity for item in sections[key] for identity in story_keys(item)
+            )
         print(key, len(sections[key]), 'final items')
     if not updated:
         print('No feeds available; preserving previous articles.json')
@@ -208,6 +207,34 @@ def main():
     }
     DEST.write_text(json.dumps(result, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     print('Saved', DEST)
+
+def story_keys(article):
+    title = re.split(r'\s+[|｜–—-]\s+', article['title'], maxsplit=1)[0]
+    keys = {('title', re.sub(r'\W+', '', title.casefold())[:100])}
+    url = urllib.parse.urlsplit(article.get('url', ''))
+    if url.netloc and url.path:
+        keys.add(('url', url.netloc.lower(), url.path.rstrip('/')))
+    return keys
+
+
+def select_articles(category, candidates, investment_stories=()):
+    seen = set(investment_stories) if category == 'knowledge' else set()
+    chosen = []
+    for article in sorted(candidates, key=lambda item: item['_time'], reverse=True):
+        if category == 'hualien' and not any(
+            '花蓮' in article.get(field, '') for field in ('title', 'summary')
+        ):
+            continue
+        identities = story_keys(article)
+        if not identities.isdisjoint(seen):
+            continue
+        seen.update(identities)
+        item = {key: value for key, value in article.items() if key != '_time'}
+        apply_editorial(item)
+        chosen.append(item)
+        if len(chosen) >= LIMIT:
+            break
+    return chosen
 
 
 if __name__ == '__main__':
