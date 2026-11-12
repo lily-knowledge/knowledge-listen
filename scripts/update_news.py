@@ -115,25 +115,39 @@ def parse_feed(root, source):
 
 
 
-def make_explanation(title, summary, category):
-    """Source-grounded listening guide; not an AI-written news article."""
-    clean = summary.strip()
-    if not clean or clean == '請點選原文連結閱讀完整報導。':
-        return '這則新聞目前只有標題，尚無足夠資料可做詳細解說。請開啟原文確認。'
-    guides = {
-        'invest': ('理解這類財經消息時，可以分別留意事件本身、影響的公司或市場，以及報導是否提供具體數字。',
-                   '股價與市場走勢還會受到其他因素影響；單篇報導不能當作買賣建議。'),
-        'health': ('閱讀醫療消息時，應分清楚研究發現、醫師建議與已確立的治療指引，並注意報導是否提到適用對象。',
-                   '健康資訊不能取代個別診斷或治療；有疑問應向醫療專業人員確認。'),
-        'knowledge': ('理解這類知識消息時，可以先找出事件的核心主題，再留意報導提出的證據、時間與背景。',
-                      '若想進一步確認細節，建議閱讀原始報導或相關第一手資料。')
-    }
-    guide, caution = guides.get(category, guides['knowledge'])
-    return ('以下是依據新聞來源摘要整理的延伸導讀，不是新聞全文。\n\n'
-            '新聞重點：' + clean + '\n\n'
-            '理解角度：' + guide + '\n\n'
-            '閱讀提醒：' + caution + '\n\n'
-            '以上未補充來源沒有提供的新事實；更多細節請點選閱讀原文。')
+EDITORIAL = {
+    'https://www.cna.com.tw/news/ahel/202611110304.aspx': (
+        '慢性阻塞性肺病會讓氣流受限。氣道發炎和痰液增加會妨礙呼吸，肺泡受損也會讓肺失去一部分彈性。'
+        '因此，有些人最先注意到的是走路或爬樓梯比以前容易喘，也有人長期咳嗽、咳痰。\n\n'
+        '吸菸是重要的致病因素。長期接觸二手菸、空氣污染或工作場所的粉塵，也會增加風險。'
+        '已經有肺阻塞的人，呼吸道感染或空氣污染可能讓症狀突然加重。'
+        '如果原本只是活動時喘，後來同樣的活動明顯更喘，或咳嗽和痰量比平時增加，就值得就醫評估。\n\n'
+        '醫師會結合暴露史、症狀和肺功能檢查。肺量計會測量用力吹氣的速度與總量，'
+        '幫助判斷氣流是否持續受限。治療可依個人情況包括戒菸、吸入藥物及肺部復健。',
+        'https://www.who.int/en/news-room/fact-sheets/detail/chronic-obstructive-pulmonary-disease-%28copd%29',
+    ),
+    'https://news.pts.org.tw/article/835315': (
+        '海葵白化時，體內的共生藻因環境壓力而流失，海葵的顏色也跟著變淡。'
+        '小丑魚平常把海葵當作避難所，研究人員因此想知道，海葵白化會不會改變魚群的行為。\n\n'
+        '研究團隊分析巴布亞紐幾內亞金貝灣在二〇二三年海洋熱浪期間的水下影片。'
+        '他們分別觀察水溫升高和海葵白化時魚群的表現。'
+        '這次觀察中，單看水溫上升，小丑魚的行為變化較小。'
+        '海葵白化後，小丑魚更積極防守棲身的海葵，群內成員之間的攻擊也增加。\n\n'
+        '同一個魚群可以同時出現兩種反應：更努力守住共同的住處，成員之間卻更常互相攻擊。'
+        '這是研究團隊在特定地點和熱浪期間看到的現象。'
+        '要知道其他海域的小丑魚是否也會這樣，還需要其他地點的觀察。',
+        'https://www.ncl.ac.uk/press/articles/latest/2026/11/clownfishanemonebleaching/',
+    ),
+}
+
+
+def apply_editorial(article):
+    article.pop('explanation', None)
+    article.pop('explanation_url', None)
+    entry = EDITORIAL.get(article.get('url'))
+    if entry:
+        article['explanation'], article['explanation_url'] = entry
+
 
 def google_fallback(key):
     params = urllib.parse.urlencode({
@@ -173,7 +187,7 @@ def main():
                 continue
             seen.add(identity)
             item.pop('_time', None)
-            item['explanation'] = make_explanation(item['title'], item['summary'], key)
+            apply_editorial(item)
             chosen.append(item)
             if len(chosen) >= LIMIT:
                 break
@@ -183,7 +197,7 @@ def main():
         else:
             sections[key] = previous.get('sections', {}).get(key, [])
             for item in sections[key]:
-                item['explanation'] = make_explanation(item.get('title', ''), item.get('summary', ''), key)
+                apply_editorial(item)
         print(key, len(sections[key]), 'final items')
     if not updated:
         print('No feeds available; preserving previous articles.json')
