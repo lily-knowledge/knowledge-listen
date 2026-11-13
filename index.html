@@ -98,9 +98,19 @@ function parse(x){
  return Object.entries(x).flatMap(([category,items])=>Array.isArray(items)?items.map(a=>({...a,category:a.category||category})):[])
 }
 function norm(a){if(!a||typeof a!=='object')return null;let title=str(a.title||a.headline||a.name);if(!title)return null;return {title,category:cat(a.category||a.type||a.topic||a.section),summary:str(a.summary||a.description||a.excerpt||a.digest),content:str(a.explanation),explanationUrl:str(a.explanation_url),url:str(a.url||a.link||a.source_url),source:str(a.source||a.publisher),date:str(a.date||a.published||a.pubDate)}}
-async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=withExplanations(a);if(!el('detail').classList.contains('hidden'))show(section)}}catch(e){console.info('使用內建示範文章',e)}}
+async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=withExplanations(a);if(!el('detail').classList.contains('hidden'))refreshArticles()}}catch(e){console.info('使用內建示範文章',e)}}
 function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
 function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
+function refreshArticles(){
+  const playing=visible[index];
+  visible=section==='audio'?episodes:data.filter(article=>article.category===section);
+  if(playing){
+    const current=visible.findIndex(article=>article.url===playing.url&&article.title===playing.title);
+    if(current>=0)index=current;
+    else stop();
+  }
+  render();
+}
 function home(){stop();el('detail').classList.add('hidden');el('home').classList.remove('hidden')}
 function setMode(m){mode=m;localStorage.setItem('listen-mode',m);stop();render()}
 function comparableText(text){
@@ -201,23 +211,35 @@ el('player').classList.remove('hidden');
 el('status').textContent='準備語音……';
 speakChunk(chunks,0,currentToken);
 }
-function speakChunk(chunks,position,currentToken){
+function speakChunk(chunks,position,currentToken,voice=chosenVoice(),retried=false){
   if(currentToken!==token)return;
   const utterance=new SpeechSynthesisUtterance(chunks[position].trim());
   utterance.lang='zh-TW';
   utterance.rate=Number(el('rate').value);
-  utterance.voice=chosenVoice();
+  if(voice){
+    utterance.voice=voice;
+    utterance.lang=voice.lang;
+  }
   utterance.onstart=()=>{if(currentToken===token)el('status').textContent='朗讀中'};
   utterance.onend=()=>{
     if(currentToken!==token)return;
-    if(position+1<chunks.length)speakChunk(chunks,position+1,currentToken);
+    if(position+1<chunks.length)speakChunk(chunks,position+1,currentToken,voice,retried);
     else if(el('continuous').checked)next();
     else stop();
   };
   utterance.onerror=event=>{
-    if(currentToken===token&&!['canceled','interrupted'].includes(event.error)){
-      el('status').textContent='朗讀中斷，請重試';
+    if(currentToken!==token)return;
+    if(!retried&&['network','voice-unavailable','language-unavailable','synthesis-failed','audio-busy'].includes(event.error)){
+      const localVoice=availableVoices().find(candidate=>
+        candidate.localService&&/^zh[-_]TW$/i.test(candidate.lang)&&candidate!==voice
+      );
+      if(localVoice){
+        el('status').textContent='正在切換為裝置上的台灣國語……';
+        speakChunk(chunks,position,currentToken,localVoice,true);
+        return;
+      }
     }
+    el('status').textContent='無法朗讀，請從聲音選單選另一個聲音再試。';
   };
   speechSynthesis.speak(utterance);
 }
