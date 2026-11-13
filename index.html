@@ -52,7 +52,42 @@ const episodes=[
     ]
   }
 ];
-let data=[investmentGuide,...examples],visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
+const archivedExplanations=[
+  {
+    "title": "吸菸者罹肺阻塞風險高 醫提醒五大惡化風險因子",
+    "category": "health",
+    "summary": "（中央社記者沈佩瑤台北11日電）國外研究顯示，吸菸者罹患肺阻塞風險，比非吸菸者高6.3倍，醫師提醒肺功能較差、曾發生心血管疾病相關事件等五大惡化風險因子，可透過評估表了解自身風險，落實戒菸等措施。",
+    "content": "慢性阻塞性肺病會讓氣流受限。氣道發炎和痰液增加會妨礙呼吸，肺泡受損也會讓肺失去一部分彈性。因此，有些人最先注意到的是走路或爬樓梯比以前容易喘，也有人長期咳嗽、咳痰。\n\n吸菸是重要的致病因素。長期接觸二手菸、空氣污染或工作場所的粉塵，也會增加風險。已經有肺阻塞的人，呼吸道感染或空氣污染可能讓症狀突然加重。如果原本只是活動時喘，後來同樣的活動明顯更喘，或咳嗽和痰量比平時增加，就值得就醫評估。\n\n醫師會結合暴露史、症狀和肺功能檢查。肺量計會測量用力吹氣的速度與總量，幫助判斷氣流是否持續受限。治療可依個人情況包括戒菸、吸入藥物及肺部復健。",
+    "explanationUrl": "https://www.who.int/en/news-room/fact-sheets/detail/chronic-obstructive-pulmonary-disease-%28copd%29",
+    "url": "https://www.cna.com.tw/news/ahel/202611110304.aspx",
+    "source": "中央社・生活醫藥",
+    "date": "2026-11-11"
+  },
+  {
+    "title": "英研究指海洋熱浪致海葵白化 小丑魚同類攻擊行為增2倍",
+    "category": "knowledge",
+    "summary": "氣候變遷除了造成水底珊瑚礁大量白化，現在還改變了小丑魚的生態。英國新堡大學最新一篇研究指出，氣候暖化引發海洋熱浪，導致小丑魚賴以生存的宿主「海葵」發生白化時，小丑魚群體內部的同類攻擊行為，大量增加到超過200%，甚至還超過了溫度改變，帶給小丑魚本身的直接衝擊。",
+    "content": "海葵白化時，體內的共生藻因環境壓力而流失，海葵的顏色也跟著變淡。小丑魚平常把海葵當作避難所，研究人員因此想知道，海葵白化會不會改變魚群的行為。\n\n研究團隊分析巴布亞紐幾內亞金貝灣在二〇二三年海洋熱浪期間的水下影片。他們分別觀察水溫升高和海葵白化時魚群的表現。這次觀察中，單看水溫上升，小丑魚的行為變化較小。海葵白化後，小丑魚更積極防守棲身的海葵，群內成員之間的攻擊也增加。\n\n同一個魚群可以同時出現兩種反應：更努力守住共同的住處，成員之間卻更常互相攻擊。這是研究團隊在特定地點和熱浪期間看到的現象。要知道其他海域的小丑魚是否也會這樣，還需要其他地點的觀察。",
+    "explanationUrl": "https://www.ncl.ac.uk/press/articles/latest/2026/11/clownfishanemonebleaching/",
+    "url": "https://news.pts.org.tw/article/835315",
+    "source": "公視新聞",
+    "date": "2026-11-11"
+  }
+];
+
+function withExplanations(articles){
+  const archivedByUrl=new Map(archivedExplanations.map(article=>[article.url,article]));
+  const currentUrls=new Set(articles.map(article=>article.url));
+  const current=articles.map(article=>{
+    const archived=archivedByUrl.get(article.url);
+    return archived&&!article.content
+      ? {...article,content:archived.content,explanationUrl:archived.explanationUrl}
+      : article;
+  });
+  return [investmentGuide,...current,...archivedExplanations.filter(article=>!currentUrls.has(article.url))];
+}
+
+let data=withExplanations(examples),visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
 const el=id=>document.getElementById(id),str=x=>typeof x==='string'?x.trim():'';
 function cat(x){x=String(x||'').toLowerCase();if(x==='hualien')return 'hualien';return /invest|finance|market|business|投資|理財|財經|金融|股市|經濟/.test(x)?'invest':/health|medical|medicine|健康|醫療|醫藥|衛生/.test(x)?'health':'knowledge'}
 function parse(x){
@@ -63,7 +98,7 @@ function parse(x){
  return Object.entries(x).flatMap(([category,items])=>Array.isArray(items)?items.map(a=>({...a,category:a.category||category})):[])
 }
 function norm(a){if(!a||typeof a!=='object')return null;let title=str(a.title||a.headline||a.name);if(!title)return null;return {title,category:cat(a.category||a.type||a.topic||a.section),summary:str(a.summary||a.description||a.excerpt||a.digest),content:str(a.explanation),explanationUrl:str(a.explanation_url),url:str(a.url||a.link||a.source_url),source:str(a.source||a.publisher),date:str(a.date||a.published||a.pubDate)}}
-async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=[investmentGuide,...a];if(!el('detail').classList.contains('hidden'))show(section)}}catch(e){console.info('使用內建示範文章',e)}}
+async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=withExplanations(a);if(!el('detail').classList.contains('hidden'))show(section)}}catch(e){console.info('使用內建示範文章',e)}}
 function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
 function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
 function home(){stop();el('detail').classList.add('hidden');el('home').classList.remove('hidden')}
