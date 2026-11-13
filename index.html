@@ -5,8 +5,8 @@
 #backTop:focus-visible{outline:3px solid #2ca5b2;outline-offset:3px}
 @media(max-width:600px){#backTop{right:12px;bottom:12px}body:has(#player:not(.hidden)) #backTop{bottom:165px}}</style>
 <header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華・花蓮地方新聞｜摘要與詳細解說朗讀</p></header><main>
-<div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('hualien',true)"><h2>📍 花蓮地方新聞</h2><p>在地消息與新聞摘要</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>集中聆聽所有文章</p></button></div>
-<div id="detail" class="hidden"><button class="btn alt" onclick="home()">← 返回首頁</button><h2 id="heading"></h2><p>朗讀模式：<button class="btn" id="sbtn" onclick="setMode('summary')">摘要</button><button class="btn" id="fbtn" onclick="setMode('full')">詳細解說</button></p><div id="articles"></div></div>
+<div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('hualien',true)"><h2>📍 花蓮地方新聞</h2><p>在地消息與新聞摘要</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>主題解說與分章朗讀</p></button></div>
+<div id="detail" class="hidden"><button class="btn alt" onclick="home()">← 返回首頁</button><h2 id="heading"></h2><p id="mode-controls">朗讀模式：<button class="btn" id="sbtn" onclick="setMode('summary')">摘要</button><button class="btn" id="fbtn" onclick="setMode('full')">詳細解說</button></p><div id="articles"></div></div>
 <div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.25" selected>1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
 <script>
 const examples=[['invest','認識分散投資','分散投資可以降低單一資產的風險，但無法保證獲利。','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['invest','什麼是安全邊際？','買入價格與估計合理價值之間保留一定空間。','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。'],['health','睡眠與健康','規律作息與舒適睡眠環境有助健康。','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['health','認識血壓紀錄','持續記錄血壓比只看一次量測更有參考價值。','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。'],['knowledge','如何有效學習？','拆解目標，透過重述與間隔複習加深記憶。','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['knowledge','建立每日閱讀習慣','每天固定閱讀五分鐘並記錄重點。','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']].map(([category,title,summary,content])=>({category,title,summary,content}));
@@ -27,6 +27,31 @@ const investmentGuide={
     {url:'https://www.twse.com.tw/zh/ETFortune/etfInfo/0052',label:'0052 臺灣證券交易所'}
   ]
 };
+const episodes=[
+  {
+    "title": "黃金存摺、黃金 ETF、金條，差在哪？",
+    "source": "第一集・黃金持有方式",
+    "content": "第一章，先想像你今天就要賣。\n\n假設你有一筆錢想放進黃金。走進銀行，可以買進黃金存摺。打開證券帳戶，會看到黃金基金。到了金品櫃檯，你還可以買到一塊真的金條。三個畫面都寫著黃金，但真正會改變你體驗的，是你買到什麼、錢從哪裡回來，以及買賣之間要付多少成本。\n\n拿一張紙，畫三欄。第一欄寫「買進付多少」，第二欄寫「現在賣掉能拿多少」，第三欄寫「持有期間還要付什麼」。這三個問題，可以拿去問銀行、券商和金商。只看國際金價，常會漏掉後面兩欄。你也可以先想像半年後突然需要用錢。到時候，你希望從手機送出交易，還是願意帶著金品去找回購櫃檯？答案會讓三種方式的差別變得很具體。\n\n今天的金額例子都是假設。整集先看台灣常見的交易方式，再用香港上市的產品，講跨市場持有時多了哪些成本。\n\n第二章，黃金存摺的牌價怎麼讀？\n\n假設牌價寫著，銀行賣出每克四千元，銀行買進每克三千九百六十元。這兩行是站在銀行的角度寫的。你要買進，就看銀行賣出的四千元。你要賣回，就看銀行買進的三千九百六十元。買十克會付四萬元。同一時間立刻賣回，會拿回三萬九千六百元。差額四百元，占原本投入的一個百分點。即使這一分鐘金價完全沒動，這筆差額已經存在。\n\n你可以把回本目標記得很簡單。買進時每克付四千元，之後要看銀行願意用多少買回。銀行買進牌價回到四千元，十克才回到原本的四萬元。畫面上的銀行賣出價先漲回四千元，對你的回售金額沒有直接幫助。實際計算還要納入可能適用的費用。\n\n臺灣銀行的黃金存摺是用重量記錄持有量，不計息，也沒有存款保險。黃金跌了，帳戶裡的克數可以一樣，換回的新臺幣卻變少。你若想換成實體金品，要看銀行提供哪些規格，還要查轉換時應補繳多少。牌價表上會分開列出存摺的每克報價，以及各種金品的轉換補繳款。\n\n第三章，黃金 ETF 先看裡面裝什麼。\n\n在券商的畫面上，黃金 ETF 可以像股票一樣下單。但你買到的是基金或信託的受益單位，產品裡面怎麼持有黃金，得看官方資料。以臺灣掛牌的零零六三五 U 為例，證交所把它列為期貨 ETF。香港掛牌的二八四零是 SPDR Gold Shares 的港幣交易櫃台，其信託以持有實體黃金來反映金價表現。這兩種結構的報酬路徑不一樣。\n\n期貨有到期日，基金需要把快到期的合約換成較遠月份的合約。想像近月每盎司是兩千，遠月兩千零二十。如果基金為了延續曝險而換到較貴的遠月，且這種價格結構持續出現，轉倉可能拖累持有期間的表現。這不表示每次換約都會造成固定損失。價差的方向、大小和持續時間都會變。遇到遠月較便宜時，效果也可能不同。\n\n以實體黃金為基礎的產品，也有年度費用，以及交易時的券商費用和買賣價差。基金的每單位淨值，和你在交易所成交的價格，也可能有些差距。若市價高於淨值，叫做溢價。舉例來說，淨值一百元，卻用一百零二元買進。假設黃金價格沒變，溢價消失後，成交價格可能回到一百元附近。這個例子提醒你，下單前可以同時看買賣報價與折溢價。\n\n第四章，港幣下單，回到台幣還要算什麼？\n\n假設你用新臺幣換港幣，再買香港掛牌的黃金產品。日後賣出，你會先得到港幣。最後換回多少新臺幣，取決於賣出的成交金額、當時的換匯價格，以及這幾筆交易的費用。商品用港幣報價，和你用新臺幣衡量資產，是兩件事。可以把換匯費用、證券交易費用、持有費用分開記，才看得到從新臺幣出發又回到新臺幣的完整結果。\n\n做一個整數例子。投入十萬元新臺幣，假設用港幣計算的部位上漲百分之五，同一期間港幣換回新臺幣的匯率下跌百分之三。先忽略所有費用，將一點零五乘以零點九七，結果約是一點零一八五。換回來約十萬一千八百五十元。實際金額要再計入成交、換匯與券商收費。這個例子也說明，看到商品報酬百分之五時，要先弄清楚那是用哪個幣別算的。\n\n如果用複委託，實際下單前可以在券商的商品頁或下單畫面確認代號、交易市場、幣別，以及最低手續費。用一筆你預計的交易金額試算。相同的最低費用，放在小額交易和大額交易裡，占比可能差很多。\n\n第五章，實體金條要先問怎麼回售。\n\n你拿到金條後，實體由你安排保管。買進前可以先問，這個規格、品牌和包裝，將來有哪些通路願意回購？回購需要發票、保證書或原封包裝嗎？包裝受損、標記不清，是否要重新驗金，驗金有沒有費用？這些條件會隨通路和商品而異。購買憑證也可以和金品分開留存，方便將來核對。\n\n假設兩家金商都賣同重量的金條。甲家的售價比較低，但你附近沒有回購門市。乙家售價略高，能當場告訴你完整的回售規則。把兩家的即時回購報價一起記下來，再把可能需要跑一趟的交通時間算進去。你才能知道今天省下的錢，會不會在回售時花回去。\n\n同樣持有一百克，一整塊一百克金條，和多塊較小規格，變現方式也不同。若只需賣二十克，整塊金條通常得整塊出售。小規格可以分批賣，買進時每克的價格可能較高。可以先決定自己會不會分批用錢，再問實際的買進和回購報價。保管箱租金、保險，以及居家保管的安排，也要放回前面那張成本表。\n\n第六章，把三種方式放進同一個情境。\n\n假設你把三筆各十萬元分別放進三種方式，隔一段時間都想換回三萬元。存摺可以先看銀行回購價，再算要賣多少克。ETF 要看交易時的價格、可賣的單位數，以及券商何時能讓你動用賣出款。金條要看手上有哪些規格、回購地點與當天的報價。三筆帳面都可能寫著十萬元，當天能取回多少、多久拿得到，會因工具而不同。\n\n再做一個兩分鐘的小練習。挑同一天，把三個買進價和對應的賣出條件記下來。黃金存摺用同一銀行的雙向牌價。ETF 用同一交易幣別，連同手續費和換匯估算。金條用同一規格、同一通路的買進與回購條件。最後，算出「如果現在就要賣，我實際拿回多少」。這個數字比單看廣告上的一克多少錢，更接近你自己的持有成本。\n\n最後回到三個具體需求。想以克數累積、從銀行管道回售，可以研究黃金存摺的價差與轉換規則。想在證券帳戶裡做配置，可以先辨認 ETF 持有的是現貨黃金還是期貨，再看費用和交易幣別。想直接持有金品，就把規格、保管和回售通路一起選好。這樣你下次看到黃金牌價，就知道該用哪一個數字，回答自己的問題。\n\n第七章，拿一筆假設交易，拆開看每一層成本。\n\n先用一張簡單的帳。假設國際金價在你的持有期間上漲百分之十，但買入到賣出的兩次換匯，加起來讓你少拿到原本可換金額的百分之一。從十萬元開始，先乘以一點一，再乘以零點九九，約是十萬八千九百元。如果另外付了交易費，就再從這個金額扣掉。實際交易時，國際金價也未必等於你買的產品表現。做這個練習的目的是把每一層都寫出來，避免把不同費用重複計算，或者少算一次換匯。\n\n接著換成金條。假設你買進時付了十萬元，同時問到的回購價是九萬六千元。假設回購價日後剛好上漲百分之五，會變成十萬零八百元。此時如果驗金或交通合計花一千元，到手約九萬九千八百元。即使回購報價確實漲了，這筆交易仍可能小幅虧損。這也說明為什麼問到回購價格，比只問今天一克賣多少有用。\n\n最後再看存摺。假設你每月買一克，分三個月付了四千元、四千二百元和三千八百元，合計是一萬二千元。帳上有三克，平均每克成本是四千元。如果今天銀行每克回購三千九百五十元，三克共能換一萬一千八百五十元。你可以直接用平均成本和銀行回購價對照。若要把三克換成實物，還得另外看可轉換的最低規格和補繳金額。\n\n收聽到這裡，可以暫停一下，回想自己最重視的是哪一件事。有人希望需要用錢時，能賣掉手上的一小部分。有人希望平常就放在原本使用的證券帳戶裡管理。也有人在意自己能直接保管金品。把需求寫成一句話，再回頭查各通路的牌價、費用和變現條件，三個選項就容易比較了。",
+    "references": [
+      {
+        "url": "https://rate.bot.com.tw/gold/quote/recent?Lang=zh-TW",
+        "label": "臺灣銀行黃金牌價"
+      },
+      {
+        "url": "https://www.bot.com.tw/Images/File/GetFileId/d08f3d42-e8e2-4bb7-9084-172f2798bfb6",
+        "label": "臺灣銀行黃金存摺約定事項"
+      },
+      {
+        "url": "https://www.twse.com.tw/zh/ETFortune/etfInfo/00635U",
+        "label": "證交所 00635U"
+      },
+      {
+        "url": "https://www.ssga.com/hk/en/individual/etfs/spdr-gold-shares-2840",
+        "label": "SPDR 2840 產品資料"
+      }
+    ]
+  }
+];
 let data=[investmentGuide,...examples],visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
 const el=id=>document.getElementById(id),str=x=>typeof x==='string'?x.trim():'';
 function cat(x){x=String(x||'').toLowerCase();if(x==='hualien')return 'hualien';return /invest|finance|market|business|投資|理財|財經|金融|股市|經濟/.test(x)?'invest':/health|medical|medicine|健康|醫療|醫藥|衛生/.test(x)?'health':'knowledge'}
@@ -40,7 +65,7 @@ function parse(x){
 function norm(a){if(!a||typeof a!=='object')return null;let title=str(a.title||a.headline||a.name);if(!title)return null;return {title,category:cat(a.category||a.type||a.topic||a.section),summary:str(a.summary||a.description||a.excerpt||a.digest),content:str(a.explanation),explanationUrl:str(a.explanation_url),url:str(a.url||a.link||a.source_url),source:str(a.source||a.publisher),date:str(a.date||a.published||a.pubDate)}}
 async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=[investmentGuide,...a];if(!el('detail').classList.contains('hidden'))show(section)}}catch(e){console.info('使用內建示範文章',e)}}
 function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
-function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;visible=k==='audio'?[...data]:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
+function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
 function home(){stop();el('detail').classList.add('hidden');el('home').classList.remove('hidden')}
 function setMode(m){mode=m;localStorage.setItem('listen-mode',m);stop();render()}
 function comparableText(text){
@@ -56,7 +81,9 @@ function summary(article){
   return article.summary||article.content.slice(0,180)+(article.content.length>180?'……':'')||'尚無摘要';
 }
 function render(){
-  const detailed=mode==='full';
+  const isEpisode=section==='audio';
+  const detailed=isEpisode||mode==='full';
+  el('mode-controls').classList.toggle('hidden',isEpisode);
   el('sbtn').classList.toggle('active',!detailed);
   el('fbtn').classList.toggle('active',detailed);
   const holder=el('articles');
@@ -73,7 +100,7 @@ function render(){
     meta.textContent=[article.source,article.date].filter(Boolean).join(' · ');
     const button=document.createElement('button');
     button.className='btn';
-    button.textContent=detailed?'▶ 詳細解說朗讀':body?'▶ 摘要朗讀':'▶ 標題朗讀';
+    button.textContent=isEpisode?'▶ 播放整集':detailed?'▶ 詳細解說朗讀':body?'▶ 摘要朗讀':'▶ 標題朗讀';
     button.onclick=()=>play(index);
     card.append(title,meta);
     if(body){
@@ -131,7 +158,34 @@ function chosenVoice(){
  if(selected){const voice=voices.find(v=>v.voiceURI===selected);if(voice)return voice}
  return [...voices].sort((a,b)=>maleScore(b)-maleScore(a))[0]||null;
 }
-function play(i){if(!('speechSynthesis'in window)){alert('瀏覽器不支援朗讀，請改用 Chrome 或 Edge');return}let a=visible[i];if(!a)return;let text=mode==='full'?a.content:summary(a);if(mode==='full'&&!text)return;stop();index=i;let t=token,u=new SpeechSynthesisUtterance(text?a.title+'。'+text:a.title);u.lang='zh-TW';u.rate=Number(el('rate').value);u.voice=chosenVoice();u.onstart=()=>{if(t===token)el('status').textContent='朗讀中'};u.onend=()=>{if(t===token){if(el('continuous').checked)next();else stop()}};u.onerror=e=>{if(t===token&&!['canceled','interrupted'].includes(e.error))el('status').textContent='朗讀中斷，請重試'};el('playing').textContent=a.title;el('status').textContent='準備語音……';el('player').classList.remove('hidden');speechSynthesis.speak(u)}
+function play(i){if(!('speechSynthesis'in window)){alert('瀏覽器不支援朗讀，請改用 Chrome 或 Edge');return}let a=visible[i];if(!a)return;const detailed=section==='audio'||mode==='full';let text=detailed?a.content:summary(a);if(detailed&&!text)return;stop();index=i;const currentToken=token;
+const narration=text?a.title+'。'+text:a.title;
+const chunks=section==='audio'?narration.match(/[^。！？]+[。！？]?/g):[narration];
+el('playing').textContent=a.title;
+el('player').classList.remove('hidden');
+el('status').textContent='準備語音……';
+speakChunk(chunks,0,currentToken);
+}
+function speakChunk(chunks,position,currentToken){
+  if(currentToken!==token)return;
+  const utterance=new SpeechSynthesisUtterance(chunks[position].trim());
+  utterance.lang='zh-TW';
+  utterance.rate=Number(el('rate').value);
+  utterance.voice=chosenVoice();
+  utterance.onstart=()=>{if(currentToken===token)el('status').textContent='朗讀中'};
+  utterance.onend=()=>{
+    if(currentToken!==token)return;
+    if(position+1<chunks.length)speakChunk(chunks,position+1,currentToken);
+    else if(el('continuous').checked)next();
+    else stop();
+  };
+  utterance.onerror=event=>{
+    if(currentToken===token&&!['canceled','interrupted'].includes(event.error)){
+      el('status').textContent='朗讀中斷，請重試';
+    }
+  };
+  speechSynthesis.speak(utterance);
+}
 function pauseResume(){if(index<0)return;if(paused){speechSynthesis.resume();el('pause').textContent='⏸ 暫停';el('status').textContent='朗讀中'}else{speechSynthesis.pause();el('pause').textContent='▶ 繼續';el('status').textContent='已暫停'}paused=!paused}
 function next(){let n=index+1;while(n<visible.length&&mode==='full'&&!visible[n].content)n++;n<visible.length?play(n):stop()}
 function restart(){if(index>=0)play(index)}
