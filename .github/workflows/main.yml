@@ -23,7 +23,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Fetch RSS headlines
+      - name: Fetch RSS headlines and prepare investment explanation
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/update_news.py
       - name: Commit updated articles if changed
         run: |
