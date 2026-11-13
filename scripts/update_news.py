@@ -262,7 +262,7 @@ def main():
             if key == 'knowledge':
                 sections[key] = [
                     item for item in sections[key]
-                    if story_keys(item).isdisjoint(investment_stories)
+                    if is_knowledge_story(item) and story_keys(item).isdisjoint(investment_stories)
                 ]
             for item in sections[key]:
                 apply_editorial(item)
@@ -321,6 +321,26 @@ def has_summary(article):
     }
 
 
+KNOWLEDGE_TOPICS = re.compile(
+    r'科學|天文|太空|衛星|化石|考古|生態|物種|保育|氣候|地質|海洋|'
+    r'無人機|機器人|實驗|研究發現|研究指出|研究顯示|研究團隊|新技術|新發現|'
+    r'材料科學|能源技術|毒素|野生動物|狒狒|歷史文物|文化資產|博物館'
+)
+GENERAL_NEWS_TOPICS = re.compile(
+    r'槍擊|涉買票|賄賂|競選|候選人|公投|去職|辭職|請辭|辭執行長|接班人|'
+    r'臨時執行長|服務當機|個資疑外流|股價|台指期|供應鏈經驗交流|'
+    r'女團|爭奪地盤|美伊衝突'
+)
+
+
+def is_knowledge_story(article):
+    title = article.get('title', '')
+    return not GENERAL_NEWS_TOPICS.search(title) and bool(
+        KNOWLEDGE_TOPICS.search(title)
+        or KNOWLEDGE_TOPICS.search(article.get('summary', ''))
+    )
+
+
 def select_articles(category, candidates, investment_stories=()):
     seen = set(investment_stories) if category == 'knowledge' else set()
     chosen = []
@@ -329,6 +349,8 @@ def select_articles(category, candidates, investment_stories=()):
         key=lambda item: (category == 'hualien' and has_summary(item), item['_time']),
         reverse=True,
     ):
+        if category == 'knowledge' and not is_knowledge_story(article):
+            continue
         if category == 'health' and not is_health_story(article):
             continue
         if category == 'hualien' and not any(
