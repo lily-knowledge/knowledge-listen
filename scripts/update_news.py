@@ -23,7 +23,7 @@ ATOM_NS = '{http://www.w3.org/2005/Atom}'
 SOURCES = {
     'invest': [('中央社・產經證券', 'https://feeds.feedburner.com/rsscna/finance')],
     'hualien': [('中央通訊社', 'https://feeds.feedburner.com/rsscna/local')],
-    'health': [('中央社・生活醫藥', 'https://feeds.feedburner.com/rsscna/lifehealth')],
+    'health': [('中央社・生活', 'https://feeds.feedburner.com/rsscna/lifehealth')],
     'knowledge': [
         ('中央社・科技', 'https://feeds.feedburner.com/rsscna/technology'),
         ('中央社・文化', 'https://feeds.feedburner.com/rsscna/culture'),
@@ -32,7 +32,7 @@ SOURCES = {
 }
 QUERIES = {
     'invest': '台股 OR 美股 OR ETF 投資 理財',
-    'health': '健康 醫療 疾病預防 衛教',
+    'health': '醫療 OR 疫苗 OR 衛生 OR 疾病 OR 食安 when:7d',
     'hualien': '花蓮 when:7d',
     'knowledge': '科學 科技 生活知識 研究',
 }
@@ -186,6 +186,8 @@ def main():
             updated = True
         else:
             sections[key] = previous.get('sections', {}).get(key, [])
+            if key == 'health':
+                sections[key] = [item for item in sections[key] if is_health_story(item)]
             if key == 'knowledge':
                 sections[key] = [
                     item for item in sections[key]
@@ -198,7 +200,7 @@ def main():
                 identity for item in sections[key] for identity in story_keys(item)
             )
         print(key, len(sections[key]), 'final items')
-    if not updated:
+    if not updated and sections == previous.get('sections', {}):
         print('No feeds available; preserving previous articles.json')
         return
     result = {
@@ -217,10 +219,29 @@ def story_keys(article):
     return keys
 
 
+HEALTH_TOPICS = re.compile(
+    r'醫療|醫院|醫師|門診|診所|照護|衛生所|疾管署|疾病|疫苗|接種|感染|疫情|'
+    r'流感|新冠|COVID|病毒|癌症|肺癌|腫瘤|糖尿病|高血壓|失智|肺阻塞|'
+    r'心理健康|醫藥|用藥|藥品|藥害|健保|食安|食物中毒|重金屬超標',
+    re.IGNORECASE,
+)
+LOTTERY_TOPICS = re.compile(r'今彩\s*539|威力彩|大樂透|彩券|刮刮樂|開獎號碼')
+
+
+def is_health_story(article):
+    title = article.get('title', '')
+    summary = article.get('summary', '')
+    return not LOTTERY_TOPICS.search(title) and bool(
+        HEALTH_TOPICS.search(title) or HEALTH_TOPICS.search(summary)
+    )
+
+
 def select_articles(category, candidates, investment_stories=()):
     seen = set(investment_stories) if category == 'knowledge' else set()
     chosen = []
     for article in sorted(candidates, key=lambda item: item['_time'], reverse=True):
+        if category == 'health' and not is_health_story(article):
+            continue
         if category == 'hualien' and not any(
             '花蓮' in article.get(field, '') for field in ('title', 'summary')
         ):
