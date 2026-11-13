@@ -181,6 +181,12 @@ def main():
             candidates.extend(google_fallback(key))
         except Exception as exc:
             print('Google news unavailable:', key, str(exc))
+        if key == 'hualien':
+            cutoff = dt.datetime.now(dt.timezone.utc).date() - dt.timedelta(days=MAX_AGE_DAYS)
+            for item in previous.get('sections', {}).get(key, []):
+                if has_summary(item) and item.get('published', '') >= cutoff.isoformat():
+                    when = dt.datetime.fromisoformat(item['published']).replace(tzinfo=dt.timezone.utc)
+                    candidates.append(dict(item, _time=when.timestamp()))
         sections[key] = select_articles(key, candidates, investment_stories)
         if sections[key]:
             updated = True
@@ -236,10 +242,24 @@ def is_health_story(article):
     )
 
 
+def has_summary(article):
+    title = article.get('title', '')
+    headline = re.split(r'\s+[|｜–—-]\s+', title, maxsplit=1)[0]
+    normalize = lambda value: re.sub(r'[^\w]|_', '', value.casefold())
+    summary = normalize(article.get('summary', ''))
+    return bool(summary) and summary not in {
+        normalize(title), normalize(headline), normalize('請點選原文連結閱讀完整報導。')
+    }
+
+
 def select_articles(category, candidates, investment_stories=()):
     seen = set(investment_stories) if category == 'knowledge' else set()
     chosen = []
-    for article in sorted(candidates, key=lambda item: item['_time'], reverse=True):
+    for article in sorted(
+        candidates,
+        key=lambda item: (category == 'hualien' and has_summary(item), item['_time']),
+        reverse=True,
+    ):
         if category == 'health' and not is_health_story(article):
             continue
         if category == 'hualien' and not any(
