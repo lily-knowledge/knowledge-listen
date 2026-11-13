@@ -116,14 +116,27 @@ function setMode(m){mode=m;localStorage.setItem('listen-mode',m);stop();render()
 function comparableText(text){
   return text.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 }
+function headlineOnly(article, body){
+  const title=comparableText(article.title);
+  const headline=comparableText(article.title.split(/\s+[-–—｜|]\s+/)[0]);
+  const text=comparableText(body);
+  return !text||text===title||text===headline||
+    text===comparableText('請點選原文連結閱讀完整報導。');
+}
 function summary(article){
-  if(article.category==='hualien'){
-    const title=comparableText(article.title);
-    const body=comparableText(article.summary);
-    const headline=comparableText(article.title.split(/\s+[-–—｜|]\s+/)[0]);
-    if(!body||body===title||body===headline||article.summary==='請點選原文連結閱讀完整報導。')return '';
-  }
-  return article.summary||article.content.slice(0,180)+(article.content.length>180?'……':'')||'尚無摘要';
+  return headlineOnly(article,article.summary)?'':article.summary;
+}
+function narrationFor(article, body){
+  const parts=body.match(/[^。！？!?\n]+[。！？!?]*/g)??[];
+  const seen=new Set();
+  const unique=parts.filter(part=>{
+    const key=comparableText(part);
+    if(!key||seen.has(key)||headlineOnly(article,part))return false;
+    seen.add(key);
+    return true;
+  });
+  const title=article.title.replace(/[。！？!?]+$/u,'');
+  return unique.length?[title,...unique].map((part,i)=>i===0?part+'。':part.trim()).join(' '):title;
 }
 function render(){
   const isEpisode=section==='audio';
@@ -204,7 +217,7 @@ function chosenVoice(){
  return [...voices].sort((a,b)=>maleScore(b)-maleScore(a))[0]||null;
 }
 function play(i){if(!('speechSynthesis'in window)){alert('瀏覽器不支援朗讀，請改用 Chrome 或 Edge');return}let a=visible[i];if(!a)return;const detailed=section==='audio'||mode==='full';let text=detailed?a.content:summary(a);if(detailed&&!text)return;stop();index=i;const currentToken=token;
-const narration=text?a.title+'。'+text:a.title;
+const narration=narrationFor(a,text);
 const chunks=section==='audio'?narration.match(/[^。！？]+[。！？]?/g):[narration];
 el('playing').textContent=a.title;
 el('player').classList.remove('hidden');
