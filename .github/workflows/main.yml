@@ -50,10 +50,15 @@ jobs:
                      if first_day <= day <= today.isoformat()}
           path.write_text(json.dumps(history, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PYTHON
+      - name: Generate the next listening episode when due
+        continue-on-error: true
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: python scripts/update_episodes.py
       - name: Commit updated articles if changed
         run: |
-          git add articles.json news-history.json
-          if git diff --cached --quiet -- articles.json news-history.json; then
+          git add articles.json news-history.json episodes.json
+          if git diff --cached --quiet -- articles.json news-history.json episodes.json; then
             echo 'No changes to publish.'
             exit 0
           fi
