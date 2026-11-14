@@ -8,7 +8,7 @@
 <p id="history-controls" hidden><label for="news-date">舊新聞</label> <select id="news-date"><option value="">最新</option></select></p>
 <div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('hualien',true)"><h2>📍 花蓮地方新聞</h2><p>在地消息與新聞摘要</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>主題解說與分章朗讀</p></button></div>
 <div id="detail" class="hidden"><button class="btn alt" onclick="home()">← 返回首頁</button><h2 id="heading"></h2><p id="mode-controls">朗讀模式：<button class="btn" id="sbtn" onclick="setMode('summary')">摘要</button><button class="btn" id="fbtn" onclick="setMode('full')">詳細解說</button></p><div id="articles"></div></div>
-<div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.25" selected>1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
+<div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.15" selected>1.15倍</option><option value="1.25">1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
 <script>
 const examples=[['invest','認識分散投資','分散投資可以降低單一資產的風險，但無法保證獲利。','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['invest','什麼是安全邊際？','買入價格與估計合理價值之間保留一定空間。','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。'],['health','睡眠與健康','規律作息與舒適睡眠環境有助健康。','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['health','認識血壓紀錄','持續記錄血壓比只看一次量測更有參考價值。','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。'],['knowledge','如何有效學習？','拆解目標，透過重述與間隔複習加深記憶。','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['knowledge','建立每日閱讀習慣','每天固定閱讀五分鐘並記錄重點。','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']].map(([category,title,summary,content])=>({category,title,summary,content}));
 const episodes=[
@@ -224,9 +224,9 @@ function chosenVoice(){
  if(selected){const voice=voices.find(v=>v.voiceURI===selected);if(voice)return voice}
  return [...voices].sort((a,b)=>maleScore(b)-maleScore(a))[0]||null;
 }
-function play(i){if(!('speechSynthesis'in window)){alert('瀏覽器不支援朗讀，請改用 Chrome 或 Edge');return}let a=visible[i];if(!a)return;const detailed=section==='audio'||mode==='full';let text=detailed?a.content:summary(a);if(detailed&&!text)return;stop();index=i;const currentToken=token;
+function play(i,continuePlayback=false){if(!('speechSynthesis'in window)){alert('瀏覽器不支援朗讀，請改用 Chrome 或 Edge');return}let a=visible[i];if(!a)return;const detailed=section==='audio'||mode==='full';let text=detailed?a.content:summary(a);if(detailed&&!text)return;if(!continuePlayback)stop();index=i;const currentToken=token;
 const narration=narrationFor(a,text);
-const chunks=section==='audio'?narration.match(/[^。！？]+[。！？]?/g):[narration];
+const chunks=(narration.match(/[^。！？]+[。！？]*|[。！？]+/g)||[]).filter(chunk=>chunk.trim());
 el('playing').textContent=a.title;
 el('player').classList.remove('hidden');
 el('status').textContent='準備語音……';
@@ -244,9 +244,16 @@ function speakChunk(chunks,position,currentToken,voice=chosenVoice(),retried=fal
   utterance.onstart=()=>{if(currentToken===token)el('status').textContent='朗讀中'};
   utterance.onend=()=>{
     if(currentToken!==token)return;
-    if(position+1<chunks.length)speakChunk(chunks,position+1,currentToken,voice,retried);
-    else if(el('continuous').checked)next();
-    else stop();
+    setTimeout(()=>{
+      if(currentToken!==token)return;
+      if(position+1<chunks.length){
+        speakChunk(chunks,position+1,currentToken,voice,retried);
+      }else if(el('continuous').checked){
+        next(true);
+      }else{
+        stop();
+      }
+    },0);
   };
   utterance.onerror=event=>{
     if(currentToken!==token)return;
@@ -265,12 +272,18 @@ function speakChunk(chunks,position,currentToken,voice=chosenVoice(),retried=fal
   speechSynthesis.speak(utterance);
 }
 function pauseResume(){if(index<0)return;if(paused){speechSynthesis.resume();el('pause').textContent='⏸ 暫停';el('status').textContent='朗讀中'}else{speechSynthesis.pause();el('pause').textContent='▶ 繼續';el('status').textContent='已暫停'}paused=!paused}
-function next(){let n=index+1;while(n<visible.length&&mode==='full'&&!visible[n].content)n++;n<visible.length?play(n):stop()}
+function next(continuePlayback=false){
+  let following=index+1;
+  const detailed=section==='audio'||mode==='full';
+  while(detailed&&following<visible.length&&!visible[following].content)following++;
+  if(following<visible.length)play(following,continuePlayback);
+  else stop();
+}
 function restart(){if(index>=0)play(index)}
 window.addEventListener('pagehide',stop);
 window.addEventListener('scroll',()=>el('backTop').classList.toggle('visible',window.scrollY>350),{passive:true});
 if('speechSynthesis' in window){refreshVoices();speechSynthesis.addEventListener('voiceschanged',refreshVoices)}
-el('rate').value=localStorage.getItem('listen-rate')||'1.25';
+el('rate').value=localStorage.getItem('listen-rate')||'1.15';
 el('rate').addEventListener('change',()=>localStorage.setItem('listen-rate',el('rate').value));
 render();load();loadHistory();
 </script></html>
