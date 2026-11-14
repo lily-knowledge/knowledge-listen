@@ -27,14 +27,37 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: python scripts/update_news.py
+      - name: Save seven days of previous news
+        run: |
+          python - <<'PYTHON'
+          import datetime as dt
+          import json
+          import subprocess
+          from pathlib import Path
+
+          path = Path('news-history.json')
+          history = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+          taipei = dt.timezone(dt.timedelta(hours=8))
+          today = dt.datetime.now(taipei).date()
+          for raw in [subprocess.check_output(['git', 'show', 'HEAD:articles.json']),
+                      Path('articles.json').read_bytes()]:
+              snapshot = json.loads(raw)
+              day = dt.date.fromisoformat(snapshot['updated_at'][:10])
+              history[day.isoformat()] = snapshot['sections']
+
+          first_day = (today - dt.timedelta(days=7)).isoformat()
+          history = {day: history[day] for day in sorted(history)
+                     if first_day <= day <= today.isoformat()}
+          path.write_text(json.dumps(history, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+          PYTHON
       - name: Commit updated articles if changed
         run: |
-          if git diff --quiet -- articles.json; then
+          git add articles.json news-history.json
+          if git diff --cached --quiet -- articles.json news-history.json; then
             echo 'No changes to publish.'
             exit 0
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add articles.json
           git commit -m 'Update daily knowledge headlines'
           git push
