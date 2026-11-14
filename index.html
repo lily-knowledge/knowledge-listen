@@ -5,6 +5,7 @@
 #backTop:focus-visible{outline:3px solid #2ca5b2;outline-offset:3px}
 @media(max-width:600px){#backTop{right:12px;bottom:12px}body:has(#player:not(.hidden)) #backTop{bottom:165px}}</style>
 <header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華・花蓮地方新聞｜摘要與詳細解說朗讀</p></header><main>
+<p id="history-controls" hidden><label for="news-date">舊新聞</label> <select id="news-date"><option value="">最新</option></select></p>
 <div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('hualien',true)"><h2>📍 花蓮地方新聞</h2><p>在地消息與新聞摘要</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>主題解說與分章朗讀</p></button></div>
 <div id="detail" class="hidden"><button class="btn alt" onclick="home()">← 返回首頁</button><h2 id="heading"></h2><p id="mode-controls">朗讀模式：<button class="btn" id="sbtn" onclick="setMode('summary')">摘要</button><button class="btn" id="fbtn" onclick="setMode('full')">詳細解說</button></p><div id="articles"></div></div>
 <div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.25" selected>1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
@@ -81,9 +82,33 @@ function parse(x){
  return Object.entries(x).flatMap(([category,items])=>Array.isArray(items)?items.map(a=>({...a,category:a.category||category})):[])
 }
 function norm(a){if(!a||typeof a!=='object')return null;let title=str(a.title||a.headline||a.name);if(!title)return null;return {title,category:cat(a.category||a.type||a.topic||a.section),summary:str(a.summary||a.description||a.excerpt||a.digest),content:str(a.explanation),explanationUrl:str(a.explanation_url),url:str(a.url||a.link||a.source_url),source:str(a.source||a.publisher),date:str(a.date||a.published||a.pubDate)}}
-async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){data=withExplanations(a);if(!el('detail').classList.contains('hidden'))refreshArticles()}}catch(e){console.info('使用內建示範文章',e)}}
+async function load(){try{let r=await fetch('./articles.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)return;let a=parse(await r.json()).map(norm).filter(Boolean);if(a.length){latestNews=withExplanations(a);if(newsDate.value)return;data=latestNews;if(!el('detail').classList.contains('hidden'))refreshArticles()}}catch(e){console.info('使用內建示範文章',e)}}
+const newsDate=el('news-date');
+let newsHistory={};
+let latestNews=data;
+async function loadHistory(){
+  try {
+    const response=await fetch('./news-history.json',{cache:'no-store'});
+    if(!response.ok)return;
+    newsHistory=await response.json();
+    const taipeiToday=new Intl.DateTimeFormat('sv-SE',{timeZone:'Asia/Taipei'}).format(new Date());
+    const today=Date.parse(taipeiToday);
+    for(const date of Object.keys(newsHistory).sort().reverse()){
+      const age=(today-Date.parse(date))/86400000;
+      if(!Number.isInteger(age)||age<1||age>7)continue;
+      const [year,month,day]=date.split('-');
+      newsDate.add(new Option(`${Number(year)-1911}/${month}/${day}`,date));
+    }
+    el('history-controls').hidden=newsDate.options.length===1;
+  }catch(error){console.info('無法載入舊新聞',error)}
+}
+newsDate.addEventListener('change',()=>{
+  stop();
+  data=newsDate.value?parse({sections:newsHistory[newsDate.value]}).map(norm).filter(Boolean):latestNews;
+  if(!el('detail').classList.contains('hidden'))refreshArticles();
+});
 function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
-function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
+function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;el('history-controls').hidden=k==='audio'||newsDate.options.length===1;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
 function refreshArticles(){
   const playing=visible[index];
   visible=section==='audio'?episodes:data.filter(article=>article.category===section);
@@ -94,7 +119,7 @@ function refreshArticles(){
   }
   render();
 }
-function home(){stop();el('detail').classList.add('hidden');el('home').classList.remove('hidden')}
+function home(){stop();el('history-controls').hidden=newsDate.options.length===1;el('detail').classList.add('hidden');el('home').classList.remove('hidden')}
 function setMode(m){mode=m;localStorage.setItem('listen-mode',m);stop();render()}
 function comparableText(text){
   return text.normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
@@ -247,5 +272,5 @@ window.addEventListener('scroll',()=>el('backTop').classList.toggle('visible',wi
 if('speechSynthesis' in window){refreshVoices();speechSynthesis.addEventListener('voiceschanged',refreshVoices)}
 el('rate').value=localStorage.getItem('listen-rate')||'1.25';
 el('rate').addEventListener('change',()=>localStorage.setItem('listen-rate',el('rate').value));
-render();load();
+render();load();loadHistory();
 </script></html>
