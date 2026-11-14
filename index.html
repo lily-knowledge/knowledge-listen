@@ -10,23 +10,6 @@
 <div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.25" selected>1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
 <script>
 const examples=[['invest','認識分散投資','分散投資可以降低單一資產的風險，但無法保證獲利。','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['invest','什麼是安全邊際？','買入價格與估計合理價值之間保留一定空間。','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。'],['health','睡眠與健康','規律作息與舒適睡眠環境有助健康。','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['health','認識血壓紀錄','持續記錄血壓比只看一次量測更有參考價值。','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。'],['knowledge','如何有效學習？','拆解目標，透過重述與間隔複習加深記憶。','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['knowledge','建立每日閱讀習慣','每天固定閱讀五分鐘並記錄重點。','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']].map(([category,title,summary,content])=>({category,title,summary,content}));
-const investmentGuide={
-  category:'invest',
-  title:'0050 和 0052 有什麼差別？',
-  source:'投資解說',
-  summary:'0050 追蹤台灣大型上市公司，0052 聚焦台灣資訊科技股。兩檔一起買時，要看主要持股重疊多少，以及科技股在整體資產裡占多少。',
-  content:`先看兩檔基金怎麼選股。0050 是元大台灣50，追蹤臺灣50指數。指數從符合條件的台灣上市公司裡挑出市值最大的五十家，涵蓋科技、金融等產業。市值大的公司通常權重較高，所以即使有五十家公司，科技股仍可能占很大比重。
-
-0052 是富邦科技，追蹤臺灣資訊科技指數。它把範圍集中在台灣資訊科技產業。科技景氣走強時，這種集中配置可能受惠。碰上半導體景氣轉弱或大型科技股下跌時，波動也可能更明顯。
-
-兩檔一起持有時，可以把同一家公司的權重加總。假設同一家公司在第一檔占百分之六十，在第二檔占百分之七十，而且你各投入一半資金，那麼這家公司在兩檔合計的部位裡約占百分之六十五。這是算式示範，實際比重以基金公布的持股為準。
-
-想比較兩檔，可以先看最新的前十大持股和產業比重，再看年度費用、含息報酬和下跌時的幅度。每股價格會受基金分割等因素影響。要比較長期表現，用同一段期間的含息報酬，比直接比較每股價格更有意義。`,
-  references:[
-    {url:'https://www.yuantaetfs.com/product/detail/0050/Basic_information',label:'0050 元大投信'},
-    {url:'https://www.twse.com.tw/zh/ETFortune/etfInfo/0052',label:'0052 臺灣證券交易所'}
-  ]
-};
 const episodes=[
   {
     "title": "黃金存摺、黃金 ETF、金條，差在哪？",
@@ -84,7 +67,7 @@ function withExplanations(articles){
       ? {...article,content:archived.content,explanationUrl:archived.explanationUrl}
       : article;
   });
-  return [investmentGuide,...current,...archivedExplanations.filter(article=>!currentUrls.has(article.url))];
+  return [...current,...archivedExplanations.filter(article=>!currentUrls.has(article.url))];
 }
 
 let data=withExplanations(examples),visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
