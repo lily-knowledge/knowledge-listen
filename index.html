@@ -11,7 +11,7 @@
 <div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.15" selected>1.15倍</option><option value="1.25">1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
 <script>
 const examples=[['invest','認識分散投資','分散投資可以降低單一資產的風險，但無法保證獲利。','分散投資是把資金配置在不同資產，降低單一標的波動對整體投資組合的影響。分散不保證獲利，也不能完全避免市場下跌。投資前仍需評估風險承受能力、費用與資金使用期限。'],['invest','什麼是安全邊際？','買入價格與估計合理價值之間保留一定空間。','安全邊際是估計資產合理價值後，保留一定折價空間再考慮買進的概念。合理價值屬於估計，可能出錯；價格便宜不代表一定會上漲。'],['health','睡眠與健康','規律作息與舒適睡眠環境有助健康。','規律的作息、舒適的睡眠環境與適度運動，有助維持良好睡眠。若長期失眠、嚴重打鼾或白天嗜睡，建議向醫療專業人員諮詢。'],['health','認識血壓紀錄','持續記錄血壓比只看一次量測更有參考價值。','量測血壓前先安靜休息，依照醫療人員建議採取正確姿勢與量測方式。記錄日期、時間和數值，比只看單次結果更有助於討論血壓變化。'],['knowledge','如何有效學習？','拆解目標，透過重述與間隔複習加深記憶。','把大目標拆成小段，每次聚焦一個主題。學完後試著用自己的話重述，再隔一段時間複習，通常比一次讀很久更容易建立長期記憶。'],['knowledge','建立每日閱讀習慣','每天固定閱讀五分鐘並記錄重點。','每天選擇一個固定時段，先從五分鐘開始。記下最重要的一個觀念，並想想今天能如何應用。']].map(([category,title,summary,content])=>({category,title,summary,content}));
-const episodes=[
+let episodes=[
   {
     "title": "黃金存摺、黃金 ETF、金條，差在哪？",
     "source": "第一集・黃金持有方式",
@@ -107,6 +107,16 @@ newsDate.addEventListener('change',()=>{
   data=newsDate.value?parse({sections:newsHistory[newsDate.value]}).map(norm).filter(Boolean):latestNews;
   if(!el('detail').classList.contains('hidden'))refreshArticles();
 });
+async function loadEpisodes(){
+  try {
+    const response=await fetch('./episodes.json',{cache:'no-store'});
+    if(!response.ok)return;
+    const published=await response.json();
+    if(!Array.isArray(published))return;
+    episodes=[...published.filter(episode=>episode&&str(episode.title)&&str(episode.content)),...episodes];
+    if(section==='audio'&&!el('detail').classList.contains('hidden'))refreshArticles();
+  }catch(error){console.info('無法載入新集數',error)}
+}
 function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
 function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;el('history-controls').hidden=k==='audio'||newsDate.options.length===1;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
 function refreshArticles(){
@@ -285,5 +295,5 @@ window.addEventListener('scroll',()=>el('backTop').classList.toggle('visible',wi
 if('speechSynthesis' in window){refreshVoices();speechSynthesis.addEventListener('voiceschanged',refreshVoices)}
 el('rate').value=localStorage.getItem('listen-rate')||'1.15';
 el('rate').addEventListener('change',()=>localStorage.setItem('listen-rate',el('rate').value));
-render();load();loadHistory();
+render();load();loadHistory();loadEpisodes();
 </script></html>
