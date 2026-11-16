@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 22 * * *' # 06:00 Asia/Taipei (UTC+8)
+    - cron: '0 10 * * *' # 18:00 Asia/Taipei (UTC+8)
 
 permissions:
   contents: write
@@ -25,7 +26,7 @@ jobs:
           python-version: '3.12'
       - name: Fetch RSS headlines and prepare investment explanation
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_KEY: ${{ github.event.schedule != '0 10 * * *' && secrets.OPENAI_API_KEY || '' }}
         run: python scripts/update_news.py
       - name: Save seven days of previous news
         run: |
@@ -51,6 +52,7 @@ jobs:
           path.write_text(json.dumps(history, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
           PYTHON
       - name: Generate the next listening episode when due
+        if: github.event.schedule != '0 10 * * *'
         continue-on-error: true
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
