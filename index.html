@@ -180,12 +180,12 @@ function render(){
     button.textContent=isEpisode?'▶ 播放整集':detailed?'▶ 詳細解說朗讀':body?'▶ 摘要朗讀':'▶ 標題朗讀';
     button.onclick=()=>play(index);
     card.append(title,meta);
+    card.append(button);
     if(body){
       const paragraph=document.createElement('p');
       paragraph.textContent=body;
       card.append(paragraph);
     }
-    card.append(button);
     appendArticleLink(card,article.url,'閱讀原文');
     if(detailed){
       appendArticleLink(card,article.explanationUrl,'解說來源');
