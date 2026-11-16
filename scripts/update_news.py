@@ -23,6 +23,7 @@ CONTENT_NS = '{http://purl.org/rss/1.0/modules/content/}encoded'
 ATOM_NS = '{http://www.w3.org/2005/Atom}'
 SOURCES = {
     'invest': [('中央社・產經證券', 'https://feeds.feedburner.com/rsscna/finance')],
+    'world': [('中央社・國際焦點', 'https://feeds.feedburner.com/rsscna/intworld')],
     'hualien': [('中央通訊社', 'https://feeds.feedburner.com/rsscna/local')],
     'health': [('中央社・生活', 'https://feeds.feedburner.com/rsscna/lifehealth')],
     'knowledge': [
@@ -34,6 +35,7 @@ SOURCES = {
 QUERIES = {
     'invest': '台股 OR 美股 OR ETF 投資 理財',
     'health': '醫療 OR 疫苗 OR 衛生 OR 疾病 OR 食安 when:7d',
+    'world': '外交 OR 地緣政治 OR 國際峰會 OR 國際局勢 when:7d',
     'hualien': '花蓮 when:7d',
     'knowledge': '科學 科技 生活知識 研究',
 }
@@ -346,7 +348,7 @@ def select_articles(category, candidates, investment_stories=()):
     chosen = []
     for article in sorted(
         candidates,
-        key=lambda item: (category == 'hualien' and has_summary(item), item['_time']),
+        key=lambda item: (category in ('hualien', 'world') and has_summary(item), item['_time']),
         reverse=True,
     ):
         if category == 'knowledge' and not is_knowledge_story(article):
