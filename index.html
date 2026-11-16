@@ -117,7 +117,8 @@ async function loadEpisodes(){
     if(section==='audio'&&!el('detail').classList.contains('hidden'))refreshArticles();
   }catch(error){console.info('無法載入新集數',error)}
 }
-function stop(){token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
+let episodeResume=null;
+function stop(){episodeResume=null;token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
 function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;el('history-controls').hidden=k==='audio'||newsDate.options.length===1;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
 function refreshArticles(){
   const playing=visible[index];
@@ -244,6 +245,7 @@ speakChunk(chunks,0,currentToken);
 }
 function speakChunk(chunks,position,currentToken,voice=chosenVoice(),retried=false){
   if(currentToken!==token)return;
+  if(section==='audio')episodeResume={chunks,position,voice,retried};
   const utterance=new SpeechSynthesisUtterance(chunks[position].trim());
   utterance.lang='zh-TW';
   utterance.rate=Number(el('rate').value);
@@ -281,7 +283,24 @@ function speakChunk(chunks,position,currentToken,voice=chosenVoice(),retried=fal
   };
   speechSynthesis.speak(utterance);
 }
-function pauseResume(){if(index<0)return;if(paused){speechSynthesis.resume();el('pause').textContent='⏸ 暫停';el('status').textContent='朗讀中'}else{speechSynthesis.pause();el('pause').textContent='▶ 繼續';el('status').textContent='已暫停'}paused=!paused}
+function pauseResume(){
+  if(section!=='audio')return pauseResumeNews();
+  if(index<0||!episodeResume)return;
+  if(paused){
+    paused=false;
+    const {chunks,position,voice,retried}=episodeResume;
+    el('pause').textContent='⏸ 暫停';
+    el('status').textContent='準備語音……';
+    speakChunk(chunks,position,token,voice,retried);
+  }else{
+    paused=true;
+    token++;
+    speechSynthesis.cancel();
+    el('pause').textContent='▶ 繼續';
+    el('status').textContent='已暫停';
+  }
+}
+function pauseResumeNews(){if(index<0)return;if(paused){speechSynthesis.resume();el('pause').textContent='⏸ 暫停';el('status').textContent='朗讀中'}else{speechSynthesis.pause();el('pause').textContent='▶ 繼續';el('status').textContent='已暫停'}paused=!paused}
 function next(continuePlayback=false){
   let following=index+1;
   const detailed=section==='audio'||mode==='full';
@@ -289,7 +308,15 @@ function next(continuePlayback=false){
   if(following<visible.length)play(following,continuePlayback);
   else stop();
 }
-function restart(){if(index>=0)play(index)}
+function restart(){
+  if(index<0)return;
+  if(section!=='audio'||!episodeResume)return play(index);
+  const {chunks,position}=episodeResume;
+  token++;
+  speechSynthesis.cancel();
+  episodeResume={chunks,position,voice:chosenVoice(),retried:false};
+  if(!paused)speakChunk(chunks,position,token,episodeResume.voice);
+}
 window.addEventListener('pagehide',stop);
 window.addEventListener('scroll',()=>el('backTop').classList.toggle('visible',window.scrollY>350),{passive:true});
 if('speechSynthesis' in window){refreshVoices();speechSynthesis.addEventListener('voiceschanged',refreshVoices)}
