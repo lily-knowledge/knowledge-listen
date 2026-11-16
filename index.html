@@ -4,9 +4,9 @@
 #backTop.visible{display:block}
 #backTop:focus-visible{outline:3px solid #2ca5b2;outline-offset:3px}
 @media(max-width:600px){#backTop{right:12px;bottom:12px}body:has(#player:not(.hidden)) #backTop{bottom:165px}}</style>
-<header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華・花蓮地方新聞｜摘要與詳細解說朗讀</p></header><main>
+<header><h1>🎧 我的知識隨身聽</h1><p>投資・健康・知識精華・花蓮地方新聞・國際情勢｜摘要與詳細解說朗讀</p></header><main>
 <p id="history-controls" hidden><label for="news-date">舊新聞</label> <select id="news-date"><option value="">最新</option></select></p>
-<div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('hualien',true)"><h2>📍 花蓮地方新聞</h2><p>在地消息與新聞摘要</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>主題解說與分章朗讀</p></button></div>
+<div id="home" class="grid"><button class="card" onclick="show('invest')"><h2>📈 投資理財</h2><p>理財知識與市場新聞</p></button><button class="card" onclick="show('health')"><h2>💚 健康醫療</h2><p>醫療新知與健康資訊</p></button><button class="card" onclick="show('knowledge')"><h2>📚 知識精華</h2><p>每天學習一點新知</p></button><button class="card" onclick="show('hualien',true)"><h2>📍 花蓮地方新聞</h2><p>在地消息與新聞摘要</p></button><button class="card" onclick="show('world',true)"><h2>🌍 國際情勢</h2><p>外交、地緣政治與國際大事</p></button><button class="card" onclick="show('audio')"><h2>🎙️ 精華說書</h2><p>主題解說與分章朗讀</p></button></div>
 <div id="detail" class="hidden"><button class="btn alt" onclick="home()">← 返回首頁</button><h2 id="heading"></h2><p id="mode-controls">朗讀模式：<button class="btn" id="sbtn" onclick="setMode('summary')">摘要</button><button class="btn" id="fbtn" onclick="setMode('full')">詳細解說</button></p><div id="articles"></div></div>
 <div id="player" class="player hidden"><strong id="playing"></strong><p id="status" class="note">準備朗讀</p><button class="btn" id="pause" onclick="pauseResume()">⏸ 暫停</button><button class="btn alt" onclick="stop()">■ 停止</button><button class="btn alt" onclick="next()">⏭ 下一篇</button><label>語速 <select id="rate" onchange="restart()"><option value="0.8">0.8倍</option><option value="1">1倍</option><option value="1.15" selected>1.15倍</option><option value="1.25">1.25倍</option><option value="1.5">1.5倍</option></select></label><label>聲音 <select id="voice" onchange="voiceChanged()" aria-label="選擇朗讀聲音"><option value="">自動選擇溫柔男聲（依裝置支援）</option></select></label><label><input id="continuous" type="checkbox" checked>連續播放</label></div></main><button id="backTop" title="回到最上方" aria-label="回到最上方" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button><footer>© 2026 我的知識隨身聽</footer>
 <script>
@@ -73,7 +73,7 @@ function withExplanations(articles){
 
 let data=withExplanations(examples),visible=[],section='invest',mode=localStorage.getItem('listen-mode')||'summary',index=-1,token=0,paused=false;
 const el=id=>document.getElementById(id),str=x=>typeof x==='string'?x.trim():'';
-function cat(x){x=String(x||'').toLowerCase();if(x==='hualien')return 'hualien';return /invest|finance|market|business|投資|理財|財經|金融|股市|經濟/.test(x)?'invest':/health|medical|medicine|健康|醫療|醫藥|衛生/.test(x)?'health':'knowledge'}
+function cat(x){x=String(x||'').toLowerCase();if(x==='hualien'||x==='world')return x;return /invest|finance|market|business|投資|理財|財經|金融|股市|經濟/.test(x)?'invest':/health|medical|medicine|健康|醫療|醫藥|衛生/.test(x)?'health':'knowledge'}
 function parse(x){
  if(Array.isArray(x))return x;
  if(!x||typeof x!=='object')return [];
@@ -119,7 +119,7 @@ async function loadEpisodes(){
 }
 let episodeResume=null;
 function stop(){episodeResume=null;token++;if('speechSynthesis'in window)speechSynthesis.cancel();index=-1;paused=false;el('player').classList.add('hidden');el('pause').textContent='⏸ 暫停'}
-function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;el('history-controls').hidden=k==='audio'||newsDate.options.length===1;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
+function show(k,openSummary=false){stop();if(openSummary)mode='summary';section=k;el('history-controls').hidden=k==='audio'||newsDate.options.length===1;visible=k==='audio'?episodes:data.filter(a=>a.category===k);el('home').classList.add('hidden');el('detail').classList.remove('hidden');el('heading').textContent=({invest:'📈 投資理財',health:'💚 健康醫療',knowledge:'📚 知識精華',hualien:'📍 花蓮地方新聞',world:'🌍 國際情勢',audio:'🎙️ 精華說書'})[k];render();scrollTo(0,0)}
 function refreshArticles(){
   const playing=visible[index];
   visible=section==='audio'?episodes:data.filter(article=>article.category===section);
