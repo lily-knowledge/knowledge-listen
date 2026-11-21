@@ -1,7 +1,112 @@
 {
-  "updated_at": "2026-11-21 06:40 台灣時間",
+  "updated_at": "2026-11-21 18:36 台灣時間",
   "sections": {
     "invest": [
+      {
+        "title": "中油：23日起汽柴油價格維持不調整",
+        "summary": "（中央社記者曾筠庭台北21日電）台灣中油公司今天表示，為平穩物價及照顧民生，自23日凌晨零時起至11月29日晚上12時止，汽、柴油價格維持不調整；自2月28日至11月22日執行專案平穩各項措施期間，汽、柴油合計擴大吸收約新台幣357.3億元。",
+        "url": "https://www.cna.com.tw/news/ahel/202611210162.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "經濟部：電子業對前景仍具信心　明年出口有望破兆美元",
+        "summary": "（中央社記者曾筠庭台北21日電）近期台股受美國費城半導體指數及國際科技大廠股價重挫影響走跌，經濟部今天表示，經徵詢八大工商團體，目前股市波動對企業接單及營運尚未造成影響，半導體及電子業者對產業前景仍具信心；加上AI基礎建設長期趨勢不變，且台灣近期經濟成長、工業生產及出口等指標表現亮眼，顯示產業基本面穩健，明年出口有望突破1兆美元。",
+        "url": "https://www.cna.com.tw/news/afe/202611210139.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "國安基金：已進場護盤　籲投資人保持信心理性看台股",
+        "summary": "（中央社記者曾筠庭台北21日電）美股重挫，連帶衝擊台股及其他亞洲股市，國安基金今天表示，受美國AI監管政策可能趨嚴、龐大資本支出投資效益及企業特殊因素等影響，市場對AI產業營運展望產生疑慮，國安基金已進場護盤，將視市場情況適時採取必要措施，呼籲投資人保持信心，理性看待台股。",
+        "url": "https://www.cna.com.tw/news/afe/202611210132.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "台股崩跌　金管會11/23起祭全面平盤下禁空令5措施",
+        "summary": "（中央社記者曾筠庭台北21日電）台股近期波動劇烈，金管會今天宣布再加碼5項穩定股市措施，自23日起全面禁止平盤以下放空，投資人融券及借券賣出上市櫃股票、台灣存託憑證，價格不得低於前一營業日收盤價；另將最低融券保證金成數由130%提高至150%，並暫停受理證券商申請發行認售權證上市櫃案件。",
+        "url": "https://www.cna.com.tw/news/afe/202611210127.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "NGINX釋重大安全更新　資安署籲儘速升級防範入侵",
+        "summary": "（中央社記者曾筠庭台北21日電）全球廣泛使用的網頁伺服器軟體NGINX近日發布重大安全更新，修補2項涉及HTTP/2通訊協定的嚴重遠端程式碼執行漏洞，嚴重度評分高達9.2分。數發部資安署今天提醒，攻擊者可在未經身分驗證下利用漏洞取得伺服器權限，呼籲政府機關及企業儘速升級至最新安全版本，降低遭入侵風險。",
+        "url": "https://www.cna.com.tw/news/ait/202611210071.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "那斯達克重挫5.3%逼近熊市　美股AI震盪重點一次看",
+        "summary": "（中央社紐約20日綜合外電報導）華爾街幾個月來的人工智慧（AI）多頭行情這週大震盪。投資人對AI產業估值、資料中心建設與獲利前景憂心加劇，多次將美股推向新高的「AI交易熱」演變成席捲市場的劇烈拋售潮。",
+        "url": "https://www.cna.com.tw/news/afe/202611210053.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "AI股賣壓擴散美股重挫　標普500與道瓊陷入修正",
+        "summary": "（中央社紐約20日綜合外電報導）由於Anthropic備受矚目的上市首秀表現平淡，加深市場對今年推升股市大漲的AI交易熱潮疑慮，美股今天延續跌勢，標準普爾500指數與道瓊工業指數雙雙確認進入修正。",
+        "url": "https://www.cna.com.tw/news/afe/202611210047.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "智慧製造研發計畫促投資逾154億　經部助攻高階工具機自主化",
+        "summary": "（中央社記者曾筠庭台北21日電）為支持國內產業提升高階設備及智慧製造技術能量，經濟部自112年起推動「智慧化製造核心關鍵技術研發計畫」，3年內累計完成逾千案技術移轉及廠商服務，金額約9.44億元，並促成企業投資金額逾新台幣154億元。其中，與大君鴻科技公司合作開發的五軸工具機切入半導體腔體加工市場，已取得德國業者30台訂單，預估可創造約4.5億元產值。",
+        "url": "https://www.cna.com.tw/news/afe/202611210042.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "沙拉油每月需求2.41萬噸　經部協調增產進口、媒合供貨補缺口",
+        "summary": "（中央社記者曾筠庭台北21日電）中聯油脂停工影響國內沙拉油供應，經濟部表示，國內沙拉油每月需求約2.41萬噸，目前已協調國內業者增產、擴大進口，並自上週啟動供需媒合機制協助業者取得油源。統計11月10日至19日，業者累計登記需求7343桶、約121公噸，截至19日，台糖已完成50家業者、共1341桶油品配送。",
+        "url": "https://www.cna.com.tw/news/afe/202611210038.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "雷虎科技董事長陳冠如：無人機非藝術品　消耗戰須具大量生產能力【專訪】",
+        "summary": "（中央社記者潘智義台北21日電）俄烏戰爭自2022年2月開打迄今已逾4年半，傳統兵力交鋒逐步淡去，無人機長程攻擊成為延續戰局的主角。無人機製造商雷虎科技董事長陳冠如思考產業發展趨勢表示，除近年看到的非紅供應鏈商機外，現在更深刻感受無人機「消耗戰」的龐大需求。",
+        "url": "https://www.cna.com.tw/news/afe/202611210032.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "Anthropic上市難挽跌勢　AI股單週市值蒸發逾4兆美元",
+        "summary": "（中央社記者張欣瑜舊金山20日專電）美股今天賣壓持續加劇，那斯達克指數成分股本週市值合計蒸發逾4兆美元；即使Anthropic創下史上最大規模首次公開募股（IPO）紀錄，仍未能扭轉跌勢。「科技七雄」今天收盤全數收黑。",
+        "url": "https://www.cna.com.tw/news/afe/202611210031.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "燃油價格飆升、空域受限　印度航空2026財年虧損逾781億元",
+        "summary": "（中央社記者李晉緯新德里20日專電）印度航空（Air India）正面臨燃油價格飆升等問題帶來的挑戰，讓該公司2026財政年度已虧損超過2200億盧比（約新台幣781億元）。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210025.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "輝達重挫14%連7週收黑　創金融危機後最長紀錄",
+        "summary": "（中央社記者張欣瑜舊金山20日專電）輝達（NVIDIA）今天傳出因「會計作業」問題遭到美國證管會調查，導致原本就已承壓的股價，跌幅進一步擴大，收盤重挫14.01%，且連續第7週收跌，創下2008年金融危機以來最長連跌紀錄。",
+        "url": "https://www.cna.com.tw/news/afe/202611210020.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "油價漲　週線連3黑",
+        "summary": "（中央社紐約20日綜合外電報導）交易員在美國再度打擊伊朗的風險與充足原油供應之間進行衡量，油價今天上漲，週線連續第3週收黑。",
+        "url": "https://www.cna.com.tw/news/afe/202611210018.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
+      {
+        "title": "AI股賣壓持續湧出　美股收黑、那指重挫逾5%",
+        "summary": "（中央社紐約20日綜合外電報導）人工智慧（AI）相關股票沉重賣壓持續湧出，拖累美股今天挫跌，以科技股為主的那斯達克指數重挫逾5%。",
+        "url": "https://www.cna.com.tw/news/afe/202611210015.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・產經證券"
+      },
       {
         "title": "路透：輝達再陷法律風暴　SEC調查會計作業",
         "summary": "（中央社華盛頓20日綜合外電報導）兩名知情人士表示，美國證券管理委員會（SEC）正調查輝達（Nvidia）的會計作業，使這家醜聞纏身的晶片巨擘面臨更多法律困境。",
@@ -10,228 +115,130 @@
         "source": "中央社・產經證券",
         "explanation": "根據中央社引述路透報導，兩名知情人士透露，美國證券管理委員會，也就是SEC，正在調查輝達的會計作業。這代表輝達這家AI晶片龍頭，可能再面臨新的監管與法律壓力。不過，現有摘要並未交代SEC具體調查哪些會計項目，也沒有說明調查是否已進入正式執法程序；輝達是否收到傳票、是否涉及財報更正或可能處分，仍待後續資訊確認。\n\n從財經角度來看，SEC負責監督美國資本市場與上市公司的資訊揭露。所謂調查會計作業，可能涉及收入認列、成本與費用歸屬、存貨評價、客戶交易條件，或財報揭露是否充分等議題，但這些都只是理解會計監管時常見的檢視方向，不能直接推論本案涉及其中任何一項。監管機關展開調查，也不等於公司已經違法；調查的目的，可能是釐清內部控制、交易紀錄與對投資人的揭露是否符合規範。\n\n市場接下來會關注幾個重點：第一，SEC是否公布調查範圍或採取進一步行動；第二，輝達是否對外說明相關情況；第三，是否影響公司已發布或未來發布的財報，以及投資人對其治理與風險控管的評估。摘要提到輝達「醜聞纏身」，但未列出具體案件內容，因此不能據此延伸認定各項事件彼此相關。現階段較合適的解讀是，這是一項仍在發展中的監管消息，關鍵事實有待官方文件與公司說明釐清。",
         "explanation_date": "2026-11-21"
-      },
-      {
-        "title": "AI熱潮降溫拖累風險資產　比特幣跌破6萬美元",
-        "summary": "（中央社紐約20日綜合外電報導）全球市值最大的加密貨幣比特幣（Bitcoin）今天跌破6萬美元大關，為今年7月以來首見。市場對資產估值過高的疑慮加深，拖累人工智慧（AI）相關交易及其他風險資產的表現。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210009.aspx",
-        "published": "2026-11-21",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "Anthropic上市難消疑慮　歐股受挫",
-        "summary": "（中央社倫敦20日綜合外電報導）人工智慧（AI）公司Anthropic上市首日表現強勁，但未能化解市場對科技業龐大投資與估值過高的疑慮，導致科技股重挫，拖累歐股今天收黑。",
-        "url": "https://www.cna.com.tw/news/afe/202611210003.aspx",
-        "published": "2026-11-21",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "美媒：SpaceX旗下Cursor擬逐步停用中國AI模型",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國財經媒體CNBC今天報導，SpaceX旗下人工智慧（AI）程式編碼平台Cursor正考慮逐步停止使用中國開發的開放權重AI模型，理由是「地緣政治風險」。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200353.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "Anthropic上市次日 股價早盤重挫逾9%",
-        "summary": "（中央社紐約20日綜合外電報導）人工智慧（AI）公司Anthropic宣布，該公司透過昨天創紀錄的首次公開發行（IPO）取得約916億美元資金。但Anthropic股價今天美股早盤下跌9.5%。",
-        "url": "https://www.cna.com.tw/news/afe/202611200350.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "今彩539第115281期　頭獎3注中獎",
-        "summary": "（中央社台北20日電）今彩539第115281期開獎，中獎號碼03、20、11、07、05；派彩結果，頭獎3注中獎，每注獎金新台幣800萬元。",
-        "url": "https://www.cna.com.tw/news/ahel/202611200343.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "大樂透頭獎1億元2注均分　獎落北投、土城",
-        "summary": "（中央社台北20日電）大樂透第115107期今晚開獎。中獎號碼為01、16、04、38、12、02，特別號44；派彩結果，頭獎新台幣1億元由2注均分，每注各得0.5億元，分別獎落台北市北投區、新北市土城區。",
-        "url": "https://www.cna.com.tw/news/ahel/202611200342.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "114年國人赴海外工作者達66.9萬人　日韓增最多、美中雙降",
-        "summary": "（中央社記者潘姿羽台北20日電）主計總處今天公布114年國人赴海外工作者共計66.9萬人，年增3000人；若按國家（地區）來看，赴日、韓工作人數增加最顯著，赴美國、中國人數則雙雙下滑。",
-        "url": "https://www.cna.com.tw/news/afe/202611200341.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "CNN：至少6所遭美列黑名單中國大學採購輝達晶片",
-        "summary": "（中央社紐約19日綜合外電報導）美國有線電視新聞網（CNN）檢視商業紀錄發現，近年來遭華府列入黑名單的中國大學，至少有6所通報採購受到出口管制的輝達（Nvidia）晶片，凸顯華府在管控晶片取得管道面臨困難。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200337.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "集中市場融資餘額單日大減491億元　降幅超越指數跌幅",
-        "summary": "（中央社記者曾仁凱台北20日電）AI利空頻傳，台股今天下跌2393.60點或6.23%，終場集中市場指數收在36033.29點，根據台灣證券交易所統計，今天最新上市融資餘額為新台幣4352.27億元，較昨天大減491.41億元。",
-        "url": "https://www.cna.com.tw/news/afe/202611200325.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "大樂透第115107期開獎",
-        "summary": "（中央社台北20日電）大樂透第115107期今晚開獎。中獎號碼為01、16、04、38、12、02，特別號44。",
-        "url": "https://www.cna.com.tw/news/ahel/202611200320.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "今彩539第115281期開獎",
-        "summary": "（中央社台北20日電）今彩539第115281期開獎，中獎號碼03、20、11、07、05。3星彩中獎號碼831 ，4星彩中獎號碼1479。",
-        "url": "https://www.cna.com.tw/news/ahel/202611200318.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "第3季經常帳順差創歷年次高　民眾出國旅行支出寫新高",
-        "summary": "（中央社記者潘姿羽台北20日電）中央銀行今天公布第3季國際收支統計，由於AI商機大爆發，第3季經常帳順差創下歷年單季次高，其中商品貿易順差、出口、進口同步改寫歷史新高紀錄。另外，隨著暑假出國旺季到來，第3季旅行支出創歷年單季最高。",
-        "url": "https://www.cna.com.tw/news/afe/202611200317.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "獲追加預算撥補　台電：感謝國會支持、共同穩住物價",
-        "summary": "（中央社記者梁家柔台北20日電）立法院今天三讀通過115年度追加預算案，同意撥補台電新台幣711億元，院會中也通過主決議，要求政府在117年1月底前，應全面凍漲油、電價。台電今天表示，感謝國會與社會各界支持，共同穩住國內物價，未來電價費率審議會召開時，將如實提報燃料成本、立法院追加預算審議結果及相關主決議內容，供電價費率審議會綜合考量。",
-        "url": "https://www.cna.com.tw/news/afe/202611200312.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "金居股票爆違約交割2034萬元　今年迄今第3起",
-        "summary": "（中央社記者何秀玲台北20日電）櫃買中心今天公告，金居股票交易出現投資人違約交割，個股違約總金額達新台幣2034萬6000元，為今年第3度達違約資訊揭露標準，3次揭露金額累計1億5461萬3500元。",
-        "url": "https://www.cna.com.tw/news/afe/202611200311.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
-      },
-      {
-        "title": "10月新增房貸創逾1年半新高　央行鬆綁管制效應待觀察",
-        "summary": "（中央社記者潘姿羽台北20日電）中央銀行統計，10月5大銀行新承做購屋貸款金額升至新台幣727.89億元，月增30.06億元，且為逾1年半最高水準。央行官員表示，主要反映青安2.0末班車撥款，至於央行9月小幅放寬房市管制的效應，仍須進一步觀察。",
-        "url": "https://www.cna.com.tw/news/afe/202611200309.aspx",
-        "published": "2026-11-20",
-        "source": "中央社・產經證券"
       }
     ],
     "world": [
       {
-        "title": "川普捍衛與習近平普丁關係　稱美國因此安全無虞",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普從中國返國後，今天為自己與中國國家主席習近平與俄羅斯總統普丁舉行的「意義重大」峰會辯護，表示他與中俄領導人維持良好關係是好事，「美國因此安全無虞」。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210014.aspx",
+        "title": "泰北跨境河川污染　泰總理：無法強迫中緬處理僅能尋求合作",
+        "summary": "（中央社記者李宗憲曼谷21日專電）泰國北部跨境河川污染問題持續受關注，泰國總理阿努廷今天坦言，泰國無法強迫中國或緬甸處理河川污染問題，只能尋求兩國合作。另外，中國同意派專家赴泰，協助檢測水質及評估污染程度。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210160.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "丹麥指控俄涉暗殺案　將驅逐俄國防武官並研議簽證禁令",
-        "summary": "（中央社哥本哈根20日綜合外電報導）丹麥指控俄羅斯涉嫌幕後策劃一起針對烏克蘭饒舌歌手的暗殺未遂事件，宣布將在7天內驅逐俄羅斯駐哥本哈根國防武官，並研議暫停向俄羅斯公民核發申根簽證，甚至以停止所有非必要簽證為目標。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210013.aspx",
+        "title": "「苦雨之地」法譯本亮相　吳明益：台灣是爬山航海民族",
+        "summary": "（中央社記者曾依璇巴黎21日專電）作家吳明益著作「苦雨之地」法語譯本出版，他在巴黎敘述寫作過程時說，希望台灣小學開設攀樹課，台灣人的「國民性」與中國「以農立國」不同，應是有山爬山、有海航海的民族。",
+        "url": "https://www.cna.com.tw/news/acul/202611210147.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "黃仁勳同意赴美國國會公開作證　中國間諜疑雲成焦點",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國國會議員正對輝達（Nvidia）前執行長黃仁勳與一名遭指控為中國間諜女性間的關係進行調查，共和黨聯邦參議員史考特（Tim Scott）的幕僚今天透過聲明表示，黃仁勳已同意出席參議院公開聽證會作證。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210012.aspx",
+        "title": "歐盟研議向大型科技業課稅　以籌措預算財源",
+        "summary": "（中央社布魯塞爾21日綜合外電報導）歐洲聯盟（EU）研議對全球大型數位企業課稅，以籌措下一份長期預算的財源。這項措施預計將納入今天公布的新預算草案。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210122.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "川普籲輝達讓黃仁勳回鍋　稱習近平也讚他是人才",
-        "summary": "（中央社記者侯姿瑩華盛頓20日專電）美國總統川普結束亞洲訪問返抵華府，今天在記者會上表示，只希望舊款晶片出口中國，並說，希望看到輝達前執行長黃仁勳鄭重道歉並回鍋，呼籲輝達讓黃重返崗位；川普還透露，有跟中國國家主席習近平談到黃仁勳事件，對方也稱讚黃是人才。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210011.aspx",
+        "title": "各國同意朝研議邁進　以管制致命性自主武器",
+        "summary": "（中央社日內瓦21日綜合外電報導）各國今天同意朝研議規定致命自主武器系統的方向邁進，但致力於阻止所謂「殺手機器人」的倡議團體，則對聯合國會議今天的決議感到失望，主張「這未能規劃出明確的方向」。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210119.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "路透：輝達再陷法律風暴　SEC調查會計作業",
-        "summary": "（中央社華盛頓20日綜合外電報導）兩名知情人士表示，美國證券管理委員會（SEC）正調查輝達（Nvidia）的會計作業，使這家醜聞纏身的晶片巨擘面臨更多法律困境。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210010.aspx",
+        "title": "盧比歐與范斯陪同出席白宮記者會　川普玩試鏡秀測試潛在接班人",
+        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普今天在白宮舉行記者會說明亞洲行訪問成果，可能角逐2028年總統大位的國務卿盧比歐與副總統范斯穿著相似服裝出席，幾乎肩並肩站了90分鐘，距離川普僅一臂之隔。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210112.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "AI熱潮降溫拖累風險資產　比特幣跌破6萬美元",
-        "summary": "（中央社紐約20日綜合外電報導）全球市值最大的加密貨幣比特幣（Bitcoin）今天跌破6萬美元大關，為今年7月以來首見。市場對資產估值過高的疑慮加深，拖累人工智慧（AI）相關交易及其他風險資產的表現。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210009.aspx",
+        "title": "緬甸遭認定種族滅絕　稱國際法院裁決未反映實況",
+        "summary": "（中央社記者李宗憲曼谷21日專電）聯合國國際法院19日認定緬甸對洛興雅人（Rohingya）進行種族滅絕，緬甸外交部昨天發聲明表示，對判決結果深感失望，認為裁決未能反映當地真實情況，並質疑法院對證據的採信標準。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210093.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "川普：美國只想賣中國較舊款晶片　正洽談全面協議",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普（Donald Trump）今天表示，美國只希望出售較舊款的晶片給中國，並稱他的政府正與中國討論一項協議，但未提供進一步細節。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210008.aspx",
+        "title": "川普結束亞洲行返美　白宮記者會暢談伊朗、內政與接班人",
+        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普結束為期4天的中國與菲律賓出訪行程後，今天在白宮舉行備受矚目的記者會。他原本預計向美國民眾宣傳此行成果，但川普的話題跳躍，從新空軍一號、COVID-19疫苗到伊朗問題，展現一貫不受拘束的風格。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210086.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "川普：普丁盼透過外交途徑　結束俄烏戰爭",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普（Donald Trump）今天表示，俄羅斯總統普丁（Vladimir Putin）告訴他，希望透過外交途徑結束烏克蘭戰爭。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210007.aspx",
+        "title": "韓國總統視察蔚山SK資料中心　強調AI基礎建設重要性",
+        "summary": "（中央社記者楊啟芳首爾21日專電）韓國總統李在明今天視察蔚山SK人工智慧資料中心，他表示，人工智慧資料中心是半導體的重要需求來源，也是未來Physical AI的核心基礎設施，最重要的是可以推動地方發展平衡。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210083.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "美中爭奪AI霸權仍達共識　川習同意重大軍事決策須有人類把關",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國財政部長貝森特今天指出，美國總統川普與中國國家主席習近平達成共識，凡是運用人工智慧（AI）的軍事決策，都必須要有人類參與。儘管美中正競相爭奪AI主導地位，雙方仍同意這項原則。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210006.aspx",
+        "title": "川普稱普丁「朋友」後　澤倫斯基批普丁是「凶手」",
+        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普本週稍早在中國出席國際會議期間，與俄羅斯總統普丁舉行雙邊會談時稱普丁為「朋友」。之後，烏克蘭總統澤倫斯基受訪時，則批評普丁是「凶手」。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210081.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "川普習近平會談　美財長：未提及黃仁勳",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國財政部長貝森特（Scott Bessent）今天受訪表示，美國總統川普（Donald Trump）本週與中國國家主席習近平在中國深圳會面時，並未談到輝達（Nvidia）前執行長黃仁勳。",
-        "url": "https://www.cna.com.tw/news/aopl/202611210004.aspx",
+        "title": "范斯拒答是否會下令攻打伊朗　迴避川普表態要求",
+        "summary": "（中央社華盛頓20日綜合外電報導）美國副總統范斯今天不願表態，自己是否會授權對伊朗發動空襲，以阻止伊朗發展核武。儘管總統川普要求他表明這些攻擊確有必要且他會再次發動，范斯仍迴避這一問題。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210077.aspx",
         "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "美媒：SpaceX旗下Cursor擬逐步停用中國AI模型",
-        "summary": "（中央社華盛頓20日綜合外電報導）美國財經媒體CNBC今天報導，SpaceX旗下人工智慧（AI）程式編碼平台Cursor正考慮逐步停止使用中國開發的開放權重AI模型，理由是「地緣政治風險」。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200353.aspx",
-        "published": "2026-11-20",
+        "title": "金融時報：伊朗戰事恐拖至明年　中央司令部吃不消",
+        "summary": "（中央社華盛頓20日綜合外電報導）隨美國與伊朗戰事有延續到明年的態勢，美軍高層警告若持續長期在中東維持大規模部署，恐導致美軍戰備能力過度消耗；與此同時，以色列正力促美國總統川普恢復軍事打擊伊朗。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210064.aspx",
+        "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "日學者：高市早苗在中國遭怠慢　在國內可能反增支持",
-        "summary": "（中央社東京20日綜合外電報導）日本首相高市早苗過去2天在深圳出席亞太經濟合作會議（APEC）峰會期間遭中國公然怠慢，且明顯縮減接待規格。但日本專家表示，這可能反而激起支持高市的日本保守派更相挺。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200352.aspx",
-        "published": "2026-11-20",
+        "title": "桃機轉機客北美占4成 觀光署推轉機旅遊主題網站",
+        "summary": "（中央社記者張欣瑜舊金山20日專電）2025年桃園機場轉機旅客約669萬人次，其中北美旅客約占4成。觀光署拓展過境觀光再添新意，推出以轉機旅遊為主題的網站。觀光署駐舊金山辦事處主任李思賢期盼，旅客每次造訪，都能在台灣發現不一樣的精彩。",
+        "url": "https://www.cna.com.tw/news/ahel/202611210056.aspx",
+        "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "Slush創業盛會　芬蘭總統以台灣晶片製造剖析AI戰略依賴",
-        "summary": "（中央社記者巫祈麟赫爾辛基20日專電）全球創業盛會Slush在芬蘭赫爾辛基登場，芬蘭總統史塔布親自發聲，直言在AI時代沒有任何國家能完全自主，核心競爭力在於擁有外界難以替代的技術優勢。他同時以台灣晶片製造的樞紐地位為例，深入剖析全球供應鏈的戰略依賴。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200348.aspx",
-        "published": "2026-11-20",
+        "title": "華盛頓郵報：五角大廈密令限制美加防務合作　加劇雙邊緊張關係",
+        "summary": "（中央社華盛頓20日綜合外電報導）美國官員透露，戰爭部長赫格塞斯（Pete Hegseth）已下令限制美國與加拿大的防務關係，使華府與渥太華之間的爭端進一步升高。總統川普屢次揚言併吞加拿大，使兩國關係更加緊張。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210051.aspx",
+        "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "脫歐十年融冰　歐盟：願與英國建立緊密關係",
-        "summary": "（中央社布魯塞爾20日綜合外電報導）歐盟高層今天與英國首相柏南（Andy Burnham）舉行峰會後敲定一系列協議。歐盟理事會主席柯斯塔表示，歐盟願意與英國建立「盡可能緊密的關係」。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200347.aspx",
-        "published": "2026-11-20",
+        "title": "川普：中國正大舉擴充核武　10年內恐追上美國",
+        "summary": "（中央社華盛頓20日綜合外電報導）美國總統川普今天表示，中國正「如火如荼」地擴充核武。前一天他與中國國家主席習近平及俄羅斯總統普丁會談，3國同意就防止核擴散展開對話。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210040.aspx",
+        "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "日本政府民調93%認為日中關係不佳　創歷史新高",
-        "summary": "（中央社記者戴雅真東京20日專電）日本內閣府今天公布最新「外交相關輿論調查」，認為日本與中國關係「不算良好」的受訪者比例達93%，較去年增加6.6個百分點，創下歷史新高。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200346.aspx",
-        "published": "2026-11-20",
+        "title": "匈牙利撤回反對　烏克蘭、摩爾多瓦入歐盟談判可望推進",
+        "summary": "（中央社記者劉郁葶布拉格20日專電）匈牙利不再阻擋烏克蘭與摩爾多瓦推進入歐盟談判，歐盟各國大使今天因此批准相關審查結果。不過，兩國仍須提交談判立場文件，並由歐盟會員國一致同意共同立場，才能正式開啟相關談判。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210039.aspx",
+        "published": "2026-11-21",
         "source": "中央社・國際焦點"
       },
       {
-        "title": "CNN：至少6所遭美列黑名單中國大學採購輝達晶片",
-        "summary": "（中央社紐約19日綜合外電報導）美國有線電視新聞網（CNN）檢視商業紀錄發現，近年來遭華府列入黑名單的中國大學，至少有6所通報採購受到出口管制的輝達（Nvidia）晶片，凸顯華府在管控晶片取得管道面臨困難。",
-        "url": "https://www.cna.com.tw/news/aopl/202611200337.aspx",
-        "published": "2026-11-20",
+        "title": "瑞士營造業前景看好　技職博覽會擴大招募學徒",
+        "summary": "（中央社記者郭芳君蘇黎世21日專電）瑞士營造業前景看好，建築技術人才需求持續，業者積極參與蘇黎世技職博覽會，招募年輕學徒。瑞士技職教育提供多元進修管道，從基層技術工作起步，也能半工半讀、考取證照，逐步邁向管理職或更高學歷。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210036.aspx",
+        "published": "2026-11-21",
         "source": "中央社・國際焦點"
       }
     ],
     "hualien": [
+      {
+        "title": "花蓮縣長選舉3陣營啟動全縣車掃　爭取支持",
+        "summary": "（中央社記者張祈花蓮縣21日電）3名花蓮縣長候選人今天啟動全縣車隊掃街，中國國民黨游淑貞有花蓮縣長徐榛蔚與立法委員陪同，無黨籍張峻推出限量飄帶，明天成立後援會，無黨籍魏嘉賢則獲插畫家Duncan支持。",
+        "url": "https://www.cna.com.tw/news/aloc/202611210116.aspx",
+        "published": "2026-11-21",
+        "source": "中央通訊社"
+      },
       {
         "title": "張峻遭翻流氓條例舊案稱抹黑　坦承曾與人互毆鞠躬道歉",
         "summary": "（中央社記者李先鳳花蓮縣19日電）九合一選舉倒數，無黨籍花蓮縣長候選人張峻遭國民黨翻出25年前感訓舊案，指遭檢肅流氓條例提報流氓，連2日在地方報頭版刊登；張峻今天澄清說明此抹黑事件，坦承年輕時曾因一時衝動與人互毆，留下傷害罪紀錄，當場鞠躬向大眾道歉。",
@@ -268,198 +275,198 @@
         "source": "中央通訊社"
       },
       {
-        "title": "花蓮查賄 村長候選人1起訴1交保 - Yahoo新聞",
-        "summary": "花蓮查賄 村長候選人1起訴1交保    Yahoo新聞",
-        "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxPWW1IRG5pZXJsaGdYS21sMlE1NjNnQnktWV82Mmp3ZlM5T0cxVmVETllYdDdlN3NlQUFwRnR3akpGNVZCYnQ1WHZvM2c1M3FqTUpKa2hfd2hwR3JwTUJETzNZR1lQWWdSSXNBdU03UV9jeHZjLUp0dUxNN1FVY3dRRjBNQnlaT0NSQTZ2QWl4Q19fZldvODI2ZDFsUG9qZktwdzRkdkJ2bkE4aDdfVDVyclNCSFNzNWtDdVotcy1aWnNiS3pIeHhPRVNPZ3I5c2hnVlFNd1owdWs0bUN0Um43LWV6T0I5dVNrbFVCT214SlBJTUk?oc=5",
-        "published": "2026-11-20",
+        "title": "張峻拜票車隊鳳林一路往北至花蓮市 普發政見獲熱烈回應感謝鄉親冒寒相挺! - 更生新聞網",
+        "summary": "張峻拜票車隊鳳林一路往北至花蓮市 普發政見獲熱烈回應感謝鄉親冒寒相挺!    更生新聞網",
+        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE55ODN6N28yeGxUMzRTSlU4bXJuS1VmSFFEajZlcVVUWm8tLTNWeFlUYV9lcUpKNUtJX3ZnU2tpeEowallfMTBZZUt3?oc=5",
+        "published": "2026-11-21",
+        "source": "Google 新聞"
+      },
+      {
+        "title": "酒駕還拒檢逃逸 - 花蓮最速報",
+        "summary": "請點選原文連結閱讀完整報導。",
+        "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5sM1Etc2lJVE9TT3d0bFdzSVdOMmNxQmcybjFZTllTMWJhUnhYbENZTjhqbmFWV0s5WEtIYUo5RkZSR2FxR21RR3BnYlBrUXdlS3Z5TjJOMkliTXhCWUtNeDRxT195Njh5d2ttLVhvTUxwcWxiTDdHcW9n?oc=5",
+        "published": "2026-11-21",
+        "source": "Google 新聞"
+      },
+      {
+        "title": "樂音悠揚傳溫情 花蓮榮家長輩欣賞洄響樂坊音樂會 - 中華新聞雲／中華日報",
+        "summary": "樂音悠揚傳溫情 花蓮榮家長輩欣賞洄響樂坊音樂會    中華新聞雲／中華日報",
+        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFB1NkdkNkJGZHhmV21jQS1WcW5tQVNMMTQzaU5nTWt1N0FGSnhWWlpfa0U4TWY0b05GOWZLajB1bTJzQVB5ZXBwb1NnY3Vya3QweVE?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
         "title": "花蓮警頒發感謝狀表揚行員阻詐 成功攔阻守住民眾荷包 - 更生新聞網",
         "summary": "花蓮警頒發感謝狀表揚行員阻詐 成功攔阻守住民眾荷包    更生新聞網",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBNRm15cEQxemVYVGZDYkg5NzVLbEwzdTBTZW9BWk5BZkN0M3ROc3ZYTmhtODlOa19lZGdzNUg5Vi1Cbm5WWERpVlln?oc=5",
-        "published": "2026-11-20",
+        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE9ISjJJWnpYMUxjc2s3TjN1R1ZLTFN1bGgxNzBuMW94N3h2aXEwWE9rQjNzSnVUcFdMdVA1S3B5MjB3azNjRE9MSlJR?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "【花蓮縣府深入壽豐瑞穗 個案諮詢助產業升級】 - 17news民生好報",
-        "summary": "【花蓮縣府深入壽豐瑞穗 個案諮詢助產業升級】    17news民生好報",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE1BbkpGVnFYWnlkbnNNRTBIUWhGUnhQUkg2X3EtZlNFd3ZKZDVTdy1aVjZyWC1IbllJQWVYMXFrSE5IUGVnZEgtZGl3?oc=5",
-        "published": "2026-11-20",
+        "title": "從家鄉到花蓮 國際移民日「我們．這一路」新住民家庭共融餐會溫馨登場 - Yahoo新聞",
+        "summary": "從家鄉到花蓮 國際移民日「我們．這一路」新住民家庭共融餐會溫馨登場    Yahoo新聞",
+        "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxPay1wcERydEVXQUJvWkNkR0w1bkpYSjdKaHp3TFZrM18yYVotY2ktaVFXS1M2OVVZRjdOS1RVT2F6bDhueVlCREk3T0lDWVlFMXBvOE54T19zVFhnMnEwRmk5elhoSVZnUGZuX01TRXVHTWQ0VnJHRnlUVFVGYmlZWlY1UV94WjZRN0JWV1BQWnNmS0RmbVA3bndCaFNxQUJjXzNXVTlEeEx4bG9XR25sN2FiUkZ3RDZYZkZJQmJoV1RuaHI5d3JYX0xMaXhHMGNxRnlkWmd6dlZaSXEyd0xnTm02VW8tZzNuZGhnb1FyNUxQaC16b3lDQ0ZXLXRIaTRqX2hZMWVwNy1Nak1F?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "把醫療留在當地 花蓮慈院三度榮獲國際醫療典範獎 - 中華新聞雲／中華日報",
-        "summary": "把醫療留在當地 花蓮慈院三度榮獲國際醫療典範獎    中華新聞雲／中華日報",
-        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE43WjNTUXBuQzJfUE9vX1c4RXZIcGdmcDduRWl6YlNUaTRZUjZQWkVQa1pWNG5OeGxhV2o2aGg1NHdDdU12SUVwRllBN0dZLXljaWc?oc=5",
-        "published": "2026-11-20",
+        "title": "震災拆除廢棄物清理已完成發包 11月啟動分選去化作業、加速恢復家園 - 花蓮環境保護局",
+        "summary": "震災拆除廢棄物清理已完成發包 11月啟動分選去化作業、加速恢復家園    花蓮環境保護局",
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYmhkQ0FuU29wN1luN2VVOGtpUHRnbERzTE9yUko0bFpQb0x1ZUY2dVp1OFNWUkNrTlh1SVNqZTVlbWtRcHM2TkZiMHkyN0Jta24tRDdjdkJFczFaMVRBaFNGZ2ktUV9MZ0RUUlBlZFZydUp5X1cxeFNzMTFTOGdRc3U0cjA3Tm8zZVlr?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "花蓮油茶籽評鑑認證出爐 15位優秀農友獲肯定奪獎 - 中華新聞雲／中華日報",
-        "summary": "花蓮油茶籽評鑑認證出爐 15位優秀農友獲肯定奪獎    中華新聞雲／中華日報",
-        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFBBT0lwMExrWnlYNmxwSGV0QlRtVjZDa3RkaHplOVRRR1UxV18zSFpJWUgwVDBkUjNPMXBQazB6TEU5SEJRQXVkTHMyaWJPUXlHWVE?oc=5",
-        "published": "2026-11-20",
+        "title": "選前黃金週六！花蓮張峻、游淑貞、魏嘉賢大掃街 - 自由時報",
+        "summary": "選前黃金週六！花蓮張峻、游淑貞、魏嘉賢大掃街    自由時報",
+        "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5xM1dQRVViV0pqM1VnOTYwQ2RrVTZZd196ZzNRNEN5VHpBUGtmVFlDdzZLaG1CNlZpYWd4c0prLUVOeUVoZzdOVkpGcFlfalBLS3ZwODg5NTNad2x1LUtrSUVETnAyU2ZlV3fSAW9BVV95cUxPY1huM0FpeXZiajJ5TWt2bVNDTXJpZkFHcGlmbFotX3o5RWhuVXJwUzZiU1VRU0k3NFdFNGtkRWF0dnJWUDNrMlpScDdmekRVV2dPMndQbzFSeml0RFh5MVFaZTdiX1I3T1g5V2NOeTg?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "從85歲降至65歲！林則葹連續三年質詢 花蓮長者健保補助終於擴大上路 - 更生新聞網",
-        "summary": "從85歲降至65歲！林則葹連續三年質詢 花蓮長者健保補助終於擴大上路    更生新聞網",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTFBnVWp6eGxabkI0V1dOWWIwUk10cWFPMzlxelNMQi12NWhXa3VIcmZUUDV6dXpOakFXTUN3ZTNqd1RQWHdWbG1xS01n?oc=5",
-        "published": "2026-11-20",
+        "title": "選前黃金周花蓮縣長選舉3陣營啟動全縣車掃爭取支持 - 更生新聞網",
+        "summary": "選前黃金周花蓮縣長選舉3陣營啟動全縣車掃爭取支持    更生新聞網",
+        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE4tUUR1TlZQZ09uTkZxNVJHTGd3aEZLR0U1eXcybUZrSHdrZ1ZGTjgxR0I4bTZrb1hId19lNFBPVnU2Y0hMd1FnR3dB?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "葉湘雯特製競選飄帶融花蓮山海 11/22張峻美崙後援會成立 - 匯流新聞網",
-        "summary": "葉湘雯特製競選飄帶融花蓮山海 11/22張峻美崙後援會成立    匯流新聞網",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5FXzd4UkdxS0JsX3VEbkhNSHVIRkFkOGZmVXRJaVcySjZLMUx6Y0lkYXc3ZTdIZHgwc0otd21IV0J0NmNkTjQ5aU9R?oc=5",
-        "published": "2026-11-20",
+        "title": "跨團隊守護呼吸健康 花蓮慈院肺阻塞病友會歡唱卡祖笛 - 中央社 CNA",
+        "summary": "跨團隊守護呼吸健康 花蓮慈院肺阻塞病友會歡唱卡祖笛    中央社 CNA",
+        "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1LRm9BV21LRTZuYjBPWjhaenJ1ZUFJZWNDNHFtbnJqZXZidTVJdGEwcTIyMi1ITjJCazJHYk4ydzJFVlpNYlkyUjdfbzBQdU5TN0VSWHpn?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "花蓮縣衛生局雙獎肯定勇奪中醫藥業務優等獎、照護業務執行成效第一名 - 更生新聞網",
-        "summary": "花蓮縣衛生局雙獎肯定勇奪中醫藥業務優等獎、照護業務執行成效第一名    更生新聞網",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE1CYWxpaWZibHZUS2ZuSk9MVTh3U0ZWMWhQUFQzZFhLVFJwRnpqQVBic20tSmhfQ2VCOTFKSHBMaXBhQmtqVlNNV2xn?oc=5",
-        "published": "2026-11-20",
-        "source": "Google 新聞"
-      },
-      {
-        "title": "創世斗六院獲南都斑鳩慈善社捐助花蓮建院 - 中華新聞雲／中華日報",
-        "summary": "創世斗六院獲南都斑鳩慈善社捐助花蓮建院    中華新聞雲／中華日報",
-        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTFAxdEVmMDlWVzNVaXFjcVRWcUZnUTdSQ1p5cFdFS016Y2lpd2ZxX25uZm5zRGZ4ZHBaSGpMbXZYMVVOLWNfSTZtS1J4RTNaTXdMRlE?oc=5",
-        "published": "2026-11-20",
-        "source": "Google 新聞"
-      },
-      {
-        "title": "一起挺張峻！花蓮市美崙鄉親自發成立張峻後援會 - 更生新聞網",
-        "summary": "一起挺張峻！花蓮市美崙鄉親自發成立張峻後援會    更生新聞網",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE1TeFdvVkZUVGVGcHV0T1FIR2tJZ0RkOE9DdE9NMkZndDJKRUJqelFNaHFyZVNqUmpFSTM4aEF2ZU0xX3NHcF9ERlR3?oc=5",
-        "published": "2026-11-20",
-        "source": "Google 新聞"
-      },
-      {
-        "title": "為家鄉「張」開新篇章「峻」美花蓮！ 張峻花蓮山海競選飄帶限量索取 - 更生新聞網",
-        "summary": "為家鄉「張」開新篇章「峻」美花蓮！ 張峻花蓮山海競選飄帶限量索取    更生新聞網",
-        "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE4xSHJIbGlhQzZGQ0FxbHEtV2pqTHdEZmNYUDliWkRMSVdDc0NBN0lfbWlaVE1zTEZhX25RVVVGVkJRSzVHZzd6SlNn?oc=5",
-        "published": "2026-11-20",
+        "title": "凌晨偷車才1小時就被抓 - 花蓮最速報",
+        "summary": "請點選原文連結閱讀完整報導。",
+        "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNcjJTMlRqRjZkSHhhNDVndFlpWWhxZFRTb0pPWUZVMUdQd1lZLWlkS3QtYkJtNklXbEUtNF9FYmp1dUFyQU5RSVE5NjVlVzdZQmFhN1Zocm5iMFVzVFZnR2F6Q2swMHQ3Ny1Fa21Qa1o0d0NJam02S2VIa3dlZDdraXBoTVhQZWYtMWNFN1d0Nzk?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       }
     ],
     "health": [
       {
-        "title": "名醫與疾病的對話／楊政達 罹癌才懂病人不安 生活不是只有工作 - UDN",
-        "summary": "名醫與疾病的對話／楊政達 罹癌才懂病人不安 生活不是只有工作    UDN",
-        "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9zVzRXbkJoTTUwLVJVUmFkdmVISGJtTXRZam1xbFV6eWJ6SG9mWkdhQ3B1Mnc4VXFrZzJGZDEwVDlHNTdKUjlhSjFta1pwQ3Za?oc=5",
-        "published": "2026-11-20",
+        "title": "醫療科技再進化 北榮新竹分院導入AI大腸鏡 提升息肉偵測率全面守護民眾健康 - 苗栗時報",
+        "summary": "醫療科技再進化 北榮新竹分院導入AI大腸鏡 提升息肉偵測率全面守護民眾健康    苗栗時報",
+        "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE5SeXlWVEZpb1JCNF9JNS1wYVB4SEktUno4bkJ1U1VUa0l3WVZtdVlMWGo4T3A3SUlyem1aQUNuRjVpVWVicGpLWTRqaVJTSC1idERpblVJMFNacmM?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "饒慶鈴參加台東馬偕癌症醫療大樓擴建動土 感謝深耕台東守護鄉親健康 - 台灣好新聞",
-        "summary": "饒慶鈴參加台東馬偕癌症醫療大樓擴建動土 感謝深耕台東守護鄉親健康    台灣好新聞",
-        "url": "https://news.google.com/rss/articles/CBMixgNBVV95cUxNUkhOaTFuNF9acXlDY2JvRFU4R0JjaVRpclFPRlJnTkR5Tm5KNWMxMF80ay1IQWh2ZVROLUlxYi1fYnRJbHNEOUhueEdjV3Q1UFN0WXVpNGZsNEhLcW5Ra3VNX3h5NXBoaExrcEQ5M2lyaXlrTHRzSV96ZUgtSjkzZUpIVlEtUHVzS2g1c2ZBV2JLaWpvNFVtRzBsQnY0ejdTU0kxbGhqOXhjeWQ0SThoQUhYQWlyZ0R5MjdzZG8xQWhtVVQzcVhmOUxxWjBpMXJBX2RoTGRhWHpGSmw3UWtaV3BJbWJ3QVRJbHEzMWRvR2JrQkJHSUt0RlBlQnBFclpMWjdEd3RfMTRvU3FrV2ZjeGI0UWRveVRHazBqYmIzZjlweFZISHpjcExNTk5xcGpDNE4tNU5KeWJGbVlaMjBjNUNzeTJKRzJUbnUzb2I3VDZmZUhtVEdIU1ZvM1ZxN3phQllsYXdKQ1ZRLUFrbXJ3MXplSzluNndFSVJJT1gwbWZWVTIwZDJzVWl1SnpIRHlSZm5KYkhKb2w0LXg2UWRFcUlyZGFTOHhuQlZMeE01Qm55aEhhUkdnd3l0dmZNWGN5Q2RxcTVR?oc=5",
-        "published": "2026-11-20",
+        "title": "顧立雄主持國防醫學大學校慶勉厚植全社會醫療韌性| 軍事 | 要聞 - UDN",
+        "summary": "顧立雄主持國防醫學大學校慶勉厚植全社會醫療韌性| 軍事 | 要聞    UDN",
+        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5iSU5aTnh6MG4zU0oxY0x0Tmp0clZ5a0t3ajJKUGVUdzlkUFVhelVlbGduaHZhTlJZTWZwRVdRb3V3SkVqYzBLOWNEaDgtVHhOVUE?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "益登年營收拚新高 擴展資安、智慧醫療業務 - 經濟日報",
-        "summary": "益登年營收拚新高 擴展資安、智慧醫療業務    經濟日報",
-        "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5UM2M0V2hiUUxXNVVLSkJCTWN3RWRZdWQtSGtHdEJza2ZweTliUlJ3ejNFejRWcUJVbXVWa3VrMVI5T2xtWDJIMHg1aUlwcE5uWHRjejRtcUhZd9IBX0FVX3lxTE1HMWpxOU9IclliQ1BRWndCeUxCUHZJZjVrXzJodmtKcjdoeUVmSGhlbDZyNkc4aExKcS1oekdhM1FVYWdpN2x6LUVYSTQ5aHVxdGtsa1ZCT2cxczlKM0Nv?oc=5",
-        "published": "2026-11-20",
+        "title": "中醫養生結合失智預防！臺東縣衛生局推動健康老化與社區關懷 - 台灣好報",
+        "summary": "中醫養生結合失智預防！臺東縣衛生局推動健康老化與社區關懷    台灣好報",
+        "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE5UemhqS19mbUxzbDhsMHVyMGktSjByYWhocVZaX0FJUEVMVVlKZGh2dUtXLVhEY0FadVZqN0dCTnhXd1RFMGZrNHJ2NHFnek9aSnFr?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "產發處東引舉辦獸醫師巡迴看診 - 馬祖日報",
-        "summary": "請點選原文連結閱讀完整報導。",
-        "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5acmZYeWQzcFZQSmtGdFlyUG8yRk02ZC1pd25mMmI4ZGhwSHBGZ0lzZGtOVFlJaUhSVnF2VEU3SGo1anA0VUw5ZEtWOFdTd2ZWb0pZdF9vWFh0LVZ4V1E?oc=5",
-        "published": "2026-11-20",
+        "title": "共築健康新典範！高雄榮總健康台灣深耕計畫成果展暨國際醫療韌性研討會盛大登場南部七大醫療機構攜手合作26場專題報告、8場實體展演跨國交流共築醫療韌性新未來 - 墨新聞-MORE News",
+        "summary": "共築健康新典範！高雄榮總健康台灣深耕計畫成果展暨國際醫療韌性研討會盛大登場南部七大醫療機構攜手合作26場專題報告、8場實體展演跨國交流共築醫療韌性新未來    墨新聞-MORE News",
+        "url": "https://news.google.com/rss/articles/CBMiQkFVX3lxTFBfakJUTUJ4czE2SUtJbE14SFp6X25KU050czlMNzcxek83Qm5lUVdSM2dORmNreEJ0YnBjeXlTOVJuQQ?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "亞大攜機器人教父 攻AI智慧醫療應用 | 熱門亮點 | 商情 - 經濟日報",
-        "summary": "亞大攜機器人教父 攻AI智慧醫療應用 | 熱門亮點 | 商情    經濟日報",
-        "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE5QZDYybXZ0eGctcmltLTc4UERTc244Qkg0Z3JKUzdYU3k5SVBEeUtyVjFOMS1Tclh5WXhnaFNYYW5QLTdtLVNfRk90SS1kMDMwbVBnMGUyTFVsdw?oc=5",
-        "published": "2026-11-20",
+        "title": "高榮健康台灣深耕計畫成果展暨國際醫療韌性研討會26場專題報告、8場實體展演跨國交流共築醫療韌性新未來 - 台灣好報",
+        "summary": "高榮健康台灣深耕計畫成果展暨國際醫療韌性研討會26場專題報告、8場實體展演跨國交流共築醫療韌性新未來    台灣好報",
+        "url": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1URkZLdnc2bUUxZUhQbFRKczQ5Tmw2RER1ZTZINTlBYkZqbnAtRzJPeHd2dFZHX19wV3plZmRFNll3YWFGM1R5UnlZMnlMbXdwZDln?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "雲林縣20鄉鎮市衛生所全面導入雲端智慧醫療 智慧守護鄉親健康！ - 台灣華報",
-        "summary": "雲林縣20鄉鎮市衛生所全面導入雲端智慧醫療 智慧守護鄉親健康！    台灣華報",
-        "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1oT3FRTU04dmtPdWRjVV9Jc3BuYVdxZm51QmdHMXZta1BlTFVCclNHejMzdkE4UURaajNkcUFlVXp5UXA5TWlVMDlnb0E1ZHJtOEF1YXI5UVJOOGRESGx5YVQ2a3dLZlNGd0Nz?oc=5",
-        "published": "2026-11-20",
+        "title": "部桃智慧醫療躍進 四項認證齊獲肯定 - 臺灣導報",
+        "summary": "部桃智慧醫療躍進 四項認證齊獲肯定    臺灣導報",
+        "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTFA4X3NlRW1YZXhZUlhIQkNhTVF4Ry1zdDd3YUhJZjBuXzRqMFluZTY4SHpxRUVXV1ZsVEtKcDVXTm5GNzZlNEYzYlJ5NFo0NWVyRDk3SQ?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "成大斗六分院推動愛滋防治 匿名篩檢打造友善醫療 - 大宇宙新聞民時新聞|",
-        "summary": "成大斗六分院推動愛滋防治 匿名篩檢打造友善醫療    大宇宙新聞民時新聞|",
-        "url": "https://news.google.com/rss/articles/CBMiwwJBVV95cUxNN2stS3RXXzZXX3FtWXZxM1RPWXZ3RFJvYzFteW9fTHpWcnZ2WV9yNnFialFDTFM1OHJWNzF2X2ViVzVNZFpVUFV6di1lVUtVUFptOE9TRkE3c0RyZWJrbm9TUzdsdGlrLWV4WWVsektkUGxoQ1phaDhGNW1BRl9jRFlkM2tlRFA2OGRxR05Oam1WY1JmVWptb28ySlMxaVhCZ1VCYk5fTEhpUmYycml1M2NfV0RNdGdSNHNIdnRtT0ZBMmR2OXB4RU5KNTFUZWcxNWpuMmotQ2poOGk0ZlpGVk91dGN1d3JHQmlUTnRNakNjOXhzSUdxWFJFYTc5LTh1aFFPZDhvc090T05KSnBuTHZXSmJUWmN1XzFkUEgyMDI3cnlabUlmWjZuTFNjT3hmbFBpVzBjRXFRZ1RnM09qNU9OVQ?oc=5",
-        "published": "2026-11-20",
+        "title": "台中榮總神經醫學中心副主任疑收醫療器材廠商賄賂 遭羈押禁見 - Yahoo新聞",
+        "summary": "台中榮總神經醫學中心副主任疑收醫療器材廠商賄賂 遭羈押禁見    Yahoo新聞",
+        "url": "https://news.google.com/rss/articles/CBMipANBVV95cUxQVGNJVkFacjVBU1Y0N016c3hGeThwd2VtUjFvTDhmb3hvMHpwME9oVC1ZOEdLZGxMMWdfblZmV2hUTWZUTDdmTU5zRm81Y0ltRHhWRmh6UkJ0dXhmSVA0cVNvSTQ5SDUxOEc2eVVkamZtaV9JekJrSHNkWXBhQmRneGdpOTMwMzRBNHlaM1NObEFXcnc3V0Y1NVgwQi1EV3VOUUxvaDhRb25od0tuZ3UwWnJwS2pFeV9PY25pZjNmNlF3QVlUZzZVYVRhMXhFbzMtaW1JbHB1QlpPa2p5WVhOTk9VSV9oZk1EbFRzQzMxWUF4UGJuQUZWbkZfOUdPOFUtVl9iUVZmYVlyX2FscVVBb2hHZjR3aHdMN3l6Z2xtZ3BCbm5OSkIzSnhUSEVpTFJmcnZfelFITUxuYTZlMDBYWWlZRzJleFJ6SXY4aW9ndTJyMlpyX1ktSmJGSk5wYlhSTlNzd1c5bWhDTHlqX3dONDFXMklNbzBLUWJyaW5ZNVNOc1QySVNCeVF0Y2pqekxVV0tnZmhDd19vMzB1WUo2VGV5cjM?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "台灣醫療之光照耀世界 第十一屆國際醫療典範獎頒獎典禮登場 - Yahoo新聞",
-        "summary": "台灣醫療之光照耀世界 第十一屆國際醫療典範獎頒獎典禮登場    Yahoo新聞",
-        "url": "https://news.google.com/rss/articles/CBMijgNBVV95cUxQSXFUZDA1ZGlkdEZEa0hNUERRUm1KQlg3cTNkVTNnX1k1b1hNc2dCTExZX0x5VXhLVHRoZmxsOW1VSVA4eGZIczhwSnpXY0dKblBQdUVzNkRReGxUUFFyN1ZYN08zY2xLd1hhSlFhY2pMeGRLTmNaNXFQNG9QQ18za2ZnWGRoN1VlZ0lzN2hJOEtYNzhaeWVXSElkY2FzNDFIWnlfUFc0dHU4bnBOaVU2cEpHUWZkbkZEMUpRUHM1bE9vMzk1WE5TT203U1h5T1FTX1h0WEdOOE9JaVVyZ29mMkFsX1pVajFFUVFzd2loclk4TTJPaXVrMm1ncnhVWWdDSDhPU1hVUUl6aTR5UVRIcEdVVzM5ZUV2WjU1Ny1ENjQ2ZUdpemVKOU5EVklkMUUtUmM4azhYM0RvOEQ0NmsydS01WGh2cmozbzRJU3gxVE1Md2praTVyaHFrTjBCdnNEUHJ5TmZ0VVNZWk4wQUtIa1h5cVFiMHllR3hITTJ5bGxlLXhua2ZXUlRtTFNCUQ?oc=5",
-        "published": "2026-11-20",
+        "title": "急診轉院醫師訪視費翻3倍 12/1起上路",
+        "summary": "（中央社記者沈佩瑤台北21日電）緩解大醫院急診待床壓力，健保署12月1日起調高急診病人下轉後的醫師訪視獎勵，由1000點增至3000點，轉出醫院醫師至接受轉診醫院訪視並溝通病情，即可申報獎勵、最多3次。",
+        "url": "https://www.cna.com.tw/news/ahel/202611210130.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・生活"
+      },
+      {
+        "title": "1000點變3000點！急診轉院「醫師訪視費」翻3倍 12/1正式上路 - 三立新聞",
+        "summary": "1000點變3000點！急診轉院「醫師訪視費」翻3倍 12/1正式上路    三立新聞",
+        "url": "https://news.google.com/rss/articles/CBMiTEFVX3lxTE9NVldNcENOVmJuRTA0bkhOY1BWWmhnckM2Wlc2Z2hZQ09JZ2R2bHotWGRRRHVtN0FBeDRtNl9DRk1vZTlVczNGZXowY0s?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "希瑪醫療(03309.HK)11月20日耗資11.1萬港元回購12萬股 - TradingView",
-        "summary": "希瑪醫療(03309.HK)11月20日耗資11.1萬港元回購12萬股    TradingView",
-        "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE12eWlIYWRZaHhOYTJJeFRvWEtZRFZQdHJNY2E2cE9QQ3FqZzNoRHhsOGUwdUdzWmFnOWRLcm9YVExVbFB3dnFFVHM1dmw4ZnJmSnlxWWpMcFNKc1V2ZFU4T3VGX011SncwOHc?oc=5",
-        "published": "2026-11-20",
+        "title": "同台蘇巧慧頒罕見疾病貢獻獎蕭美琴：選舉如何廝殺目標都是普及照顧| 2026九合一選舉 - UDN",
+        "summary": "同台蘇巧慧頒罕見疾病貢獻獎蕭美琴：選舉如何廝殺目標都是普及照顧| 2026九合一選舉    UDN",
+        "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTFBMM3h1RDctUlhYZmhYVVpyeWJmNVZFYVowMHlHOXU4TldwVk5BS3pBRWpKLVlybWJnb2dtQVdLREhmX3dfd0tWb3VEU2lGZjZ0UGg4V1pwQWs?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "九安醫療(002432.SZ)：累計出售回購股份694.5萬股 - TradingView",
-        "summary": "九安醫療(002432.SZ)：累計出售回購股份694.5萬股    TradingView",
-        "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5FLU1SVkVCR3EwN1hCTVE4bzVDZzlsbkVXQ2M5bGZLNVgtRDUxT2lKaG9EM1lOaHRCbDVaYVloODF2Y3JfbUM5VUlNVndKMWJZZ2taQllzVHo0ZHBGREt4Z1l5X3JkTU5LeVE?oc=5",
-        "published": "2026-11-20",
+        "title": "跨團隊守護呼吸健康 花蓮慈院肺阻塞病友會歡唱卡祖笛 - 中央社 CNA",
+        "summary": "跨團隊守護呼吸健康 花蓮慈院肺阻塞病友會歡唱卡祖笛    中央社 CNA",
+        "url": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE1LRm9BV21LRTZuYjBPWjhaenJ1ZUFJZWNDNHFtbnJqZXZidTVJdGEwcTIyMi1ITjJCazJHYk4ydzJFVlpNYlkyUjdfbzBQdU5TN0VSWHpn?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "從跨國義診到人才培育！第十一屆國際醫療典範獎揭曉，兩醫師與五團隊獲獎傳遞台灣善意| 楊艾喬 | 地方新聞 - 風傳媒",
-        "summary": "從跨國義診到人才培育！第十一屆國際醫療典範獎揭曉，兩醫師與五團隊獲獎傳遞台灣善意| 楊艾喬 | 地方新聞    風傳媒",
-        "url": "https://news.google.com/rss/articles/CBMiTkFVX3lxTFBwUVd5ZnUwQlpGYmFNclozUGVWcXpEa0YxSktOdGJDem5ENFp6c3V1cGNyOXgzTmNHUS0xZjBzZXhjcFp4Ty14U3Q2X2l0Zw?oc=5",
-        "published": "2026-11-20",
+        "title": "醫療保險股全面走弱，900億美元新規壓力會進到獲利嗎？-許明哲的產業筆記本 - CMoney投資網誌",
+        "summary": "醫療保險股全面走弱，900億美元新規壓力會進到獲利嗎？-許明哲的產業筆記本    CMoney投資網誌",
+        "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOdk9xa2FCYVo3WnQ4S296NS1QRGZrREFmSzFKeTFaNWI1MGQtR05VeXlRZmU5TUhCVmJMUnQ5dnh4Q0lTS0dwdXpjMHdLeTBQaC1Fb1dYU0s5M21kdDQtTVp2WTRFYjlxeEhfSE5rVS1BZlRqeG5wS3NSOXRSc3JNV0Vn?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "失智症防治照護政策3.0，打造全齡、全病程、全支持的照護網絡 - 高雄市政府衛生局",
-        "summary": "失智症防治照護政策3.0，打造全齡、全病程、全支持的照護網絡    高雄市政府衛生局",
-        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPVWw5ekpqTWNvWlQtTFFKWlFyUG5vQWM5MElHXzVHSFVRMTV5SEZCZ2ZGbVVnVlJoeHBpS3dsUTQ0eVVrc3FaRTVpX053aURNOU1zbWE1aWdzZkE1Y3JvTUhSbWtjRW1XV29NeW9Oa1N6NG1EYmZtSllMYzFwaTh1TjI4UHJvQVZCM1RNS2xTanBXanMyZTRPQWZ5YXA3SXJGdVJqbA?oc=5",
-        "published": "2026-11-20",
+        "title": "花蓮衛生局勇奪雙獎！中醫藥業務優等獎、照護業務成效第一 - ETtoday新聞雲",
+        "summary": "花蓮衛生局勇奪雙獎！中醫藥業務優等獎、照護業務成效第一    ETtoday新聞雲",
+        "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE5HbEFLTnFwZ0JzQS03NWRDTXpiWjhCQkhHV0dyMldLTFp3eGVvMGJ4dDhydkdMUktoZkZvWjZqUWIxOTdzZXI0cUQ3cFJodWNPWEtxYWI1QXo3bEFuVnfSAUtBVV95cUxOZU5xdkFubk0ycEU2SEJneXhxQ09oT0NDejFRLXhrSzFmOXhaaWE3MldCRGNtRXVmVURNcTg4TDdqSTg1aFcxeGZzZ2c?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "南投「黃金防疫週」將開跑 長者打雙疫苗送禮券 - Yahoo新聞",
-        "summary": "南投「黃金防疫週」將開跑 長者打雙疫苗送禮券    Yahoo新聞",
-        "url": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxNN2dOUXl6SE1temdxVzl6RnhZMGNQektLcmtzUFFpWFdKenQyZm0taDF3anhRWDVnaW9xTGd1MmRYQzI5VUkyd3BfN3hYem9Yak1EZDJWRU0wSnBFNDV1cXVPNWxYclZLS2ZybHZXZ21BT0kyMkNLRWVRdVI5SFRGV19xMjM3cXk1aUdqbk5Fa0xTWjBJVUpYckRNQS0xMUVXUnhsZHJaLXJUanhwVVFMYlFQZktfdDcxVzFkcDAxWWxOMWtUVTY2dkpyekNFV0hpRnkxRGJwUFZWLUxYWnpmdklkTnp0d0tXYnpKZk1IMUtuYUJnWVVnbmNkUDktTXQtc0tISkVaQWJQRW5jVV81aFAtdXlwUHhEZ0xXWFI5WlUtcEFFMExfVFF2VjJyQ3NJbXVJRTJqaDhBMDQ?oc=5",
-        "published": "2026-11-20",
+        "title": "台灣口腔癌死亡率超日韓　醫提醒頭頸癌三大警訊",
+        "summary": "（中央社記者沈佩瑤台北21日電）台灣口腔癌死亡率超過日、韓，患者面臨沈重醫療負擔，所幸健保今年10月起再度放寬口腔癌等頭頸癌給付。醫師提醒頭頸癌三大警訊，包括久不癒合潰瘍、不明腫塊、吞嚥困難等。",
+        "url": "https://www.cna.com.tw/news/ahel/202611210110.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・生活"
+      },
+      {
+        "title": "宜蘭社區心理衛生中心成立4週年～3處心衛中心串起蘭陽心理健康守護網 - 葛瑪蘭新聞網",
+        "summary": "宜蘭社區心理衛生中心成立4週年～3處心衛中心串起蘭陽心理健康守護網    葛瑪蘭新聞網",
+        "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE9iVnNYdUZJeEJPTFlUNVFWR21ZREJwdTJOQ1RXejd1Sngyd1Zod3VSTl9Tbmt2aEI2LS1ocHBMdnNVaE1wUXFTMTNmRVFUbklvVHVWZmlhN044Z2Zt?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       },
       {
-        "title": "把醫療留在當地 花蓮慈院三度榮獲國際醫療典範獎 - 中華新聞雲／中華日報",
-        "summary": "把醫療留在當地 花蓮慈院三度榮獲國際醫療典範獎    中華新聞雲／中華日報",
-        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE43WjNTUXBuQzJfUE9vX1c4RXZIcGdmcDduRWl6YlNUaTRZUjZQWkVQa1pWNG5OeGxhV2o2aGg1NHdDdU12SUVwRllBN0dZLXljaWc?oc=5",
-        "published": "2026-11-20",
-        "source": "Google 新聞"
-      },
-      {
-        "title": "嘉灣榮院共識營聚焦智慧醫療與永續經營 提升醫療品質 迎接超高齡社會 - 三星傳媒",
-        "summary": "嘉灣榮院共識營聚焦智慧醫療與永續經營 提升醫療品質 迎接超高齡社會    三星傳媒",
-        "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9QLUpybms4djZ1ZEhLQ2hXdXBVbDI3WElBNGNRSGI1eDhfRTRucGFDckpyU05uN2JQUFpGZTZLenh6SU5kTTkyMXNjQnduYmN1R3RyUVdfenNlbWVweEhMQ19B?oc=5",
-        "published": "2026-11-20",
-        "source": "Google 新聞"
-      },
-      {
-        "title": "貝康醫療－Ｂ(02170.HK)11月20日耗資28.64萬港元回購22.5萬股 - TradingView",
-        "summary": "貝康醫療－Ｂ(02170.HK)11月20日耗資28.64萬港元回購22.5萬股    TradingView",
-        "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5yazlJR3YxZUl1OFdFZVhrUFluMm5rRlBIODVhOXpWYjc4bkdYemtJNUF6TFFNUWlqZmI0ajZ2NThxajRJUG5QTkVUS3hXSC1yRXpJNUFaejlYSGlPcGRZVEJtal9Nbk50dWc?oc=5",
-        "published": "2026-11-20",
+        "title": "美國醫院年耗 430 億追討保費 醫療給付機構推 AI 解行政痛點 - 商傳媒",
+        "summary": "美國醫院年耗 430 億追討保費 醫療給付機構推 AI 解行政痛點    商傳媒",
+        "url": "https://news.google.com/rss/articles/CBMikgNBVV95cUxNQ3Q5QmZHem0yemgtTE9HMXRwb25HdzBMYVJrUHlsVnJ6NEZWZ09oLW1TMmNVWHZfX3Q4M0VuTzRsazlUNDZhc3V6OWVodWFudkZZOU5LY1ZBMGFFa1hYbExzaU8wSElhVi1PTk8zQkg3eVJ6R21MVUQwdTJNYk0wbUE0blg2Y2lya282Z0VBbTRiWDlRRDE3Q2d3MVNoOE1lalExTVdtaGJ4YnkweEdIakg1V1ppc2VoaDZ0YktJQzVxS1RUcnh0V1ZjTmJtb1Q5R2hSMHppTldqSmpvLTJpYjRtbnhSbnVGaGRIaTJmMl95ZEIwanRMbC13SjJvSkJ6SFdqTU1zdW9pcHV4ZWZNSTY3SWJZTG1uLWI2RDM2cjBHbEdOM2FBci1mTFpGb1dXRzlXZ1A2WWN5V0lVbzNiRTJyRnFHaHpETFkzbWRVUWw3WXJyUUFMbXpTWGZIX3hCM0Judi1iX21CVzFER2VNQk0tZWRLOWJJVHBHVld0cFV6SDRlVmJGeE12cllzRVRsV3c?oc=5",
+        "published": "2026-11-21",
         "source": "Google 新聞"
       }
     ],
     "knowledge": [
+      {
+        "title": "芬蘭創業盛會Slush「押注歐洲」 聚焦AI與硬體創新",
+        "summary": "（中央社記者巫祈麟赫爾辛基21日專電）「我們這輩子還未見過經濟成長。」芬蘭創業盛會Slush的年輕主辦人，在開幕舞台上道出對歐洲經濟前景的焦慮，宣示不願坐等改變。今年Slush以「押注歐洲」為主題，從看一次示範就能執行任務的機器人，到沒有駕駛艙的電動自駕曳引機，歐洲新創以人工智慧（AI）與硬體創新，尋找成長新動力。",
+        "url": "https://www.cna.com.tw/news/aopl/202611210030.aspx",
+        "published": "2026-11-21",
+        "source": "中央社・科技"
+      },
       {
         "title": "戰爭與極端氣候雙威脅 歐洲各國掀全民防災潮",
         "summary": "面對俄烏戰爭帶來的安全威脅，以及極端氣候日益頻繁的挑戰，歐洲各國正掀起一股「全民防災」浪潮。從英國、丹麥到俄羅斯邊境的愛沙尼亞，民眾紛紛囤積罐頭、飲用水與緊急避難物資，學習如何在斷水、斷電或缺乏外援的情況下減少傷害，自給自足。",
@@ -510,11 +517,11 @@
         "source": "中央社・科技"
       },
       {
-        "title": "華為加碼具身人工智慧　切入清掃機器人領域",
-        "summary": "（中央社台北16日電）中國華為公司旗下品牌華為雲今天宣布，與環保清潔裝備公司福龍馬聯合研製的新一代智慧清掃機器人啟動預售。華為雲也正式發布並開源昇騰原生具身世界模型CloudRobo-WM1.2，向機器人產業鏈延伸。",
-        "url": "https://www.cna.com.tw/news/acn/202611160296.aspx",
+        "title": "家長忍住不幫忙 科學嘉年華讓孩子自己找答案 - 蕃新聞",
+        "summary": "家長忍住不幫忙 科學嘉年華讓孩子自己找答案    蕃新聞",
+        "url": "https://news.google.com/rss/articles/CBMiUkFVX3lxTE5UVnpFTjVFYjNtSUI0ZFlGLVpyTnlNMWp0VUlxNzZBcVplUFdyX00zTXpubUF6V1FhWVFHcFN0R0tGZzlFeVpJa3k0LUlvVjZ3Z3c?oc=5",
         "published": "2026-11-16",
-        "source": "中央社・科技"
+        "source": "Google 新聞"
       }
     ]
   }
